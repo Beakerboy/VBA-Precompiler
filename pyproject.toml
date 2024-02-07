@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vba_precompiler"
+version = "0.0.1"
+authors = [
+  { name="Kevin Nowaczyk", email="beakerboy99@yahoo.com" },
+]
+description = "Precompile VBA code."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  'PyYAML',
+  'antlr4-python3-runtime',
+  'antlr4-tools',
+  'antlr4-vba'
+]
+[project.optional-dependencies]
+tests = [
+  'coveralls',
+  'flake8-annotations',
+  'mypy',
+  'pep8-naming',
+  'pytest',
+  'pytest-cov',
+  'pytest-mock',
+  'types-antlr4-python3-runtime',
+]
+[project.urls]
+"Homepage" = "https://github.com/Beakerboy/VBA-Precompiler"
+"Bug Tracker" = "https://github.com/Beakerboy/VBA-Precompiler/issues"
+    
+[tool.pytest.ini_options]
+pythonpath = "src:tests"
+testpaths = [
+    "tests",
+]
