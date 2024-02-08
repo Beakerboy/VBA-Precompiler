@@ -4,6 +4,7 @@ from vba_precompiler.vba_ccVisitor import vba_ccVisitor
 class PrecompilerVisitor(vba_ccVisitor)
 
     def visitOpExpr(self: T, ctx) -> int:
+        """
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
         op = ctx.op.getText()
@@ -13,8 +14,11 @@ class PrecompilerVisitor(vba_ccVisitor)
             case '+': return left + right
             case '-': return left - right
             default: raise Exception("Unknown operator " + op)
-
+        """
+        return 0
+        
     def visitRelExpr(self: T, ctx) -> bool:
+        """
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
         op = ctx.op.getText()
@@ -30,12 +34,15 @@ class PrecompilerVisitor(vba_ccVisitor)
             case '<=': pass
             case '=<': return left <= right
             default: raise Exception("Unknown operator " + op)
+        """
+        return False
+
     def visitStartRule(self: T, ctx) -> None:
         'visit each block
-        return this.visit(ctx.expr());
+        return this.visit(ctx.expression);
 
     def visitAtomExpr(self: T, ctx) -> Any:
         return Integer.valueOf(ctx.getText());
 
     def visitParenExpr(self: T, ctx) -> Any:
-        return self.visit(ctx.expr())
+        return self.visit(ctx.expression)
