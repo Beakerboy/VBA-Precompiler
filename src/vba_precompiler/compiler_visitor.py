@@ -22,7 +22,7 @@ class PrecompilerVisitor(vba_ccVisitor)
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
         op = ctx.op.getText()
-        switch (op.charAt(0)) {
+        switch (op.getText()) {
             case '*': return left * right
             case '/': return left / right
             case '+': return left + right
