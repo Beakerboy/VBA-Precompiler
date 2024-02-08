@@ -17,10 +17,8 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-  'PyYAML',
   'antlr4-python3-runtime',
   'antlr4-tools',
-  'antlr4-vba'
 ]
 [project.optional-dependencies]
 tests = [
