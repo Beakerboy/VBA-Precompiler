@@ -1,6 +1,7 @@
 import argparse
 from vba_precompiler.compiler import Compiler
 
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--system", default="Win16",
@@ -40,8 +41,9 @@ def main() -> None:
     env = [win16, win32, win64, mac, vba6, vba7]
     compiler = Compiler(env)
     # foreach file
-    # result = compiler.compile(file)
+    result = compiler.compile(args.directory)
     # write file
+
 
 if __name__ == '__main__':
     main()
