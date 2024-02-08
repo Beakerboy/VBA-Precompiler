@@ -3,10 +3,14 @@ from vba_precompiler.compiler import Compiler
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--os", default="Win16",
+    parser.add_argument("-s", "--system", default="Win16",
                         help="Mac, Win16, Win32, or Win64")
     parser.add_argument("-v", "--version", default=6,
                         help="VBA version, 6 or 7")
+    parser.add_argument("-o", "--output", default="./build",
+                        help="Output directory")
+    parser.add_argument("directory", default='.',
+                        help="The source directory.")
     args = parser.parse_args()
     win16 = False
     win32 = False
@@ -14,13 +18,13 @@ def main() -> None:
     mac = False
     vba6 = False
     vba7 = False
-    if args.os == "Mac":
+    if args.system == "Mac":
         mac = True
-    elif args.os == "Win16":
+    elif args.system == "Win16":
         win16 = True
-    elif args.os == "Win22":
+    elif args.system == "Win22":
         win32 = True
-    elif args.os == "Win16":
+    elif args.system == "Win16":
         win32 = True
         win64 = True
     else:
@@ -35,7 +39,9 @@ def main() -> None:
 
     env = [win16, win32, win64, mac, vba6, vba7]
     compiler = Compiler(env)
-
+    # foreach file
+    # result = compiler.compile(file)
+    # write file
 
 if __name__ == '__main__':
     main()
