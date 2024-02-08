@@ -3,8 +3,8 @@ def test_main_file() -> None:
     Test that precompiling one file works
     use default settings
     """
-    input_file = "project1/Modules/input.bas"
-    expected_file = "files/project1output.bas"
+    input_file = "tests/files/project1/Modules/input.bas"
+    expected_file = "tests/files/build/input.bas"
     argv = [
     ]
     main()
