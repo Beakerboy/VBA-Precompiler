@@ -51,9 +51,18 @@ class PrecompilerVisitor(vba_ccVisitor)
         """
         return False
 
-    def visitStartRule(self: T, ctx) -> None:
+    def visitStartRule(self: T, ctx) -> str:
         'visit each block
-        return this.visit(ctx.expression);
+        this.visit(ctx.block);
+
+        code = ""
+        size = len(self.ts.tokens)
+        i = 0
+        for token in self.ts.tokens:
+            if i + 1 < size:
+                code += token.text
+            i += 1
+        return code
 
     def visitAtomExpr(self: T, ctx) -> Any:
         return Integer.valueOf(ctx.getText());
