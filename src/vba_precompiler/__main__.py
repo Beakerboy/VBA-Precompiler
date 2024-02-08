@@ -1,5 +1,5 @@
 import argparse
-
+from vba_precompiler.compiler import Compiler
 
 def main() -> None:
     parser = argparse.ArgumentParser()
