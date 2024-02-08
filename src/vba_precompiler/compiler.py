@@ -14,7 +14,7 @@ class Compiler:
     def __init__(self: T, environment: list) -> None:
         self.environment = environment
 
-    def compile(self: T, path: str) -> None:
+    def compile(self: T, path: str) -> str:
         if Path(path).exists():
             input_stream = FileStream(path)
             lexer = Lexer(input_stream)
@@ -22,6 +22,11 @@ class Compiler:
         ts = CommonTokenStream(lexer)
         parser = Parser(ts)
         program = parser.startRule()
-        listener = VbaListener()
-        ParseTreeWalker.DEFAULT.walk(listener, program)
+        visitor = PrecompilerVisitor()
+        visitor.env = self.environment
+        visitor.ts = ts
+        code = visitor.visit(program)
+        return code
+        
+
         
