@@ -1,4 +1,4 @@
-from antlr4 import CommonTokenStream, FileStream, ParseTreeWalker, Token
+from antlr4 import CommonTokenStream, FileStream, ParseTreeWalker
 from antlr4_vba_cc.vbaccLexer import vbaccLexer as Lexer
 from pathlib import Path
 from typing import TypeVar
