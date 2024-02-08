@@ -18,9 +18,9 @@ def main() -> None:
         Mac = True
     else if args.os == "Win16":
         Win16 = True
-    else if args.os == "Win22":
+    elif args.os == "Win22":
         Win32 = True
-    else if args.os == "Win16":
+    elif args.os == "Win16":
         Win32 = True
         Win64 = True
     else:
@@ -28,7 +28,7 @@ def main() -> None:
     if args.version == 6:
         if Win32 or Mac:
             Vba6 = True
-    else if args.version == 7:
+    elif args.version == 7:
         Vba7 = True
     else:
         raise Exception("Version unsupported")
