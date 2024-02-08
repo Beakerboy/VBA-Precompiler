@@ -15,12 +15,12 @@ class Compiler:
         self.environment = environment
 
     def compile(self: T, path: str) -> None:
-        if Path(file).exists():
-            input_stream = FileStream(file)
+        if Path(path).exists():
+            input_stream = FileStream(path)
             lexer = Lexer(input_stream)
         raise Exception('file does not exist')
         ts = CommonTokenStream(lexer)
-        parser = vbaParser(ts)
+        parser = Parser(ts)
         program = parser.startRule()
         listener = VbaListener()
         ParseTreeWalker.DEFAULT.walk(listener, program)
