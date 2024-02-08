@@ -16,7 +16,7 @@ def main() -> None:
     Vba7 = False
     if args.os == "Mac":
         Mac = True
-    else if args.os == "Win16":
+    elif args.os == "Win16":
         Win16 = True
     elif args.os == "Win22":
         Win32 = True
