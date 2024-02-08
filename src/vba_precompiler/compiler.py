@@ -14,7 +14,7 @@ class Compiler:
     def __init__(self: T, environment: list) -> None:
         self.environment = environment
 
-    def compile(self;: T, path: str) -> None:
+    def compile(self: T, path: str) -> None:
         if Path(file).exists():
             input_stream = FileStream(file)
             lexer = Lexer(input_stream)
