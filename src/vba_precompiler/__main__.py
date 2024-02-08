@@ -46,8 +46,8 @@ def main() -> None:
     for file_name in file_list:
         result = compiler.compile(file_name)
         p = Path(args.output).resolve()
-            with p.open(mode='a') as fi:
-                fi.write(result)
+        with p.open(mode='a') as fi:
+            fi.write(result)
 
 
 def find_files(path: Path) -> list:
