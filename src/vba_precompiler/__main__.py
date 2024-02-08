@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 from vba_precompiler.compiler import Compiler
 
 
@@ -13,6 +14,8 @@ def main() -> None:
     parser.add_argument("directory", default='.',
                         help="The source directory.")
     args = parser.parse_args()
+    path = Path(args.directory).resolve()
+    file_list = find_files(path)
     win16 = False
     win32 = False
     win64 = False
@@ -40,9 +43,22 @@ def main() -> None:
 
     env = [win16, win32, win64, mac, vba6, vba7]
     compiler = Compiler(env)
-    # foreach file
-    result = compiler.compile(args.directory)
-    # write file
+    for file_name in file_list:
+        result = compiler.compile(file_name)
+        p = Path(args.output).resolve()
+            with p.open(mode='a') as fi:
+                fi.write(result)
+
+
+def find_files(path: Path) -> list:
+    """
+    Find all gives of given types within a directory
+    """
+    files = []
+    for child in path.rglob("*"):
+        if child.suffix in [".bas", ".cls", ".frm"]:
+            files.append(child)
+    return files
 
 
 if __name__ == '__main__':
