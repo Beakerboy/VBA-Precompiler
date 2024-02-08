@@ -32,6 +32,10 @@ def main() -> None:
         vba7 = True
     else:
         raise Exception("Version unsupported")
-    
+
+    env = [win16, win32, win64, mac, vba6, vba7]
+    compiler = Compiler(env)
+
+
 if __name__ == '__main__':
     main()
