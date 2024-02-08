@@ -3,6 +3,20 @@ from vba_precompiler.vba_ccVisitor import vba_ccVisitor
 
 class PrecompilerVisitor(vba_ccVisitor)
 
+    def visitCcConst(self:T, ctx) -> None:
+        """
+        Add a new value to the environment variables
+        and comment out the line in the source.
+        """
+        name = ctx.name
+        if exists(self.env[name]):
+            raise Exception("constant exists")
+        value = visit(ctx.value)
+        self.env.update({name : value})
+        position = ctx.start
+        # the CONST token is after the start
+        ts.getToken(start + 1).text = "'" + ts.getToken(start + 1).text
+    
     def visitOpExpr(self: T, ctx) -> int:
         """
         left = visit(ctx.expression[0])
