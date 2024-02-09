@@ -25,6 +25,5 @@ class Compiler:
         program = parser.startRule()
         visitor = Visitor()
         visitor.env = self.environment
-        visitor.ts = ts
         code = visitor.visit(program)
         return code
