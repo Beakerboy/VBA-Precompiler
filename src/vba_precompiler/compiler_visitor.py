@@ -32,8 +32,8 @@ class PrecompilerVisitor(vba_ccVisitor):
             token = ctx.getChild(2)
         index = token.tokenIndex
         # the CONST token is after the start
-        txt = "'" + self.ts[index].text
-        self.ts[index].text = txt
+        txt = "'" + self.ts.tokens[index].text
+        self.ts.tokens[index].text = txt
 
     def visitOpExpr(self: T,  # noqa: N802
                     ctx: Parser.OpExprContext) -> int:
