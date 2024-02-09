@@ -3,7 +3,8 @@ from vba_precompiler.vba_ccVisitor import vba_ccVisitor
 
 class PrecompilerVisitor(vba_ccVisitor):
 
-    def visitCcConst(self:T, ctx) -> None:
+    def visitCcConst(self:T,  # noqa: N802
+                     ctx) -> None:
         """
         Add a new value to the environment variables
         and comment out the line in the source.
@@ -17,7 +18,8 @@ class PrecompilerVisitor(vba_ccVisitor):
         # the CONST token is after the start
         ts.getToken(start + 1).text = "'" + ts.getToken(start + 1).text
     
-    def visitOpExpr(self: T, ctx) -> int:
+    def visitOpExpr(self: T,  # noqa: N802
+                    ctx) -> int:
         """
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
@@ -31,7 +33,8 @@ class PrecompilerVisitor(vba_ccVisitor):
         """
         return 0
         
-    def visitRelExpr(self: T, ctx) -> bool:
+    def visitRelExpr(self: T,  # noqa: N802
+                     ctx) -> bool:
         """
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
@@ -51,7 +54,8 @@ class PrecompilerVisitor(vba_ccVisitor):
         """
         return False
 
-    def visitStartRule(self: T, ctx) -> str:
+    def visitStartRule(self: T,  # noqa: N802
+                       ctx) -> str:
         # visit each block
         this.visit(ctx.block);
 
@@ -64,8 +68,10 @@ class PrecompilerVisitor(vba_ccVisitor):
             i += 1
         return code
 
-    def visitAtomExpr(self: T, ctx) -> Any:
+    def visitAtomExpr(self: T,  # noqa: N802
+                      ctx) -> Any:
         return Integer.valueOf(ctx.getText());
 
-    def visitParenExpr(self: T, ctx) -> Any:
+    def visitParenExpr(self: T,  # noqa: N802
+                       ctx) -> Any:
         return self.visit(ctx.expression)
