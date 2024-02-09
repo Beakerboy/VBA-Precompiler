@@ -1,6 +1,5 @@
 from antlr4 import CommonTokenStream
 from typing import Any, Dict, TypeVar
-from vba_precompiler.grammar.vba_ccLexer import vba_ccLexer as Lexer
 from vba_precompiler.grammar.vba_ccParser import vba_ccParser as Parser
 from vba_precompiler.grammar.vba_ccVisitor import vba_ccVisitor
 
@@ -34,7 +33,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         self.ts.tokens[index].text = txt
 
     def visitArithmeticExpression(self: T,  # noqa: N802
-                    ctx: Parser.ArithmeticExpressionContext) -> int:
+                                  ctx: Parser.ArithmeticExpressionContext) -> int:
         """
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
@@ -49,7 +48,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         return 0
 
     def visitRelationExpression(self: T,  # noqa: N802
-                     ctx: Parser.RelationExpressionContext) -> bool:
+                                ctx: Parser.RelationExpressionContext) -> bool:
         """
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
@@ -84,10 +83,10 @@ class PrecompilerVisitor(vba_ccVisitor):
         return code
 
     def visitLiteralExpress(self: T,  # noqa: N802
-                      ctx: Parser.LiteralExpressContext) -> Any:
+                            ctx: Parser.LiteralExpressContext) -> Any:
         # return Integer.valueOf(ctx.getText());
         return 0
 
-    def visitParenExpr(self: T,  # noqa: N802
-                       ctx: Parser.ParenExprContext) -> Any:
-        return self.visit(ctx.expression)
+    def visitParenthesizedExpression(self: T,  # noqa: N802
+                       ctx: Parser.ParenthesizedExpressionContext) -> Any:
+        return self.visit(ctx.getChild(1))
