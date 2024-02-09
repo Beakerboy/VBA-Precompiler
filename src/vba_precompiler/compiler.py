@@ -27,6 +27,3 @@ class Compiler:
         visitor.ts = ts
         code = visitor.visit(program)
         return code
-        
-
-        
