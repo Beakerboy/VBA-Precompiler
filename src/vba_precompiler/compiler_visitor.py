@@ -83,7 +83,8 @@ class PrecompilerVisitor(vba_ccVisitor):
 
     def visitAtomExpr(self: T,  # noqa: N802
                       ctx: Parser.AtomExprContext) -> Any:
-        return Integer.valueOf(ctx.getText());
+        # return Integer.valueOf(ctx.getText());
+        return 0
 
     def visitParenExpr(self: T,  # noqa: N802
                        ctx: Parser.ParenExprContext) -> Any:
