@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import TypeVar
 from vba_precompiler.vba_ccLexer import vba_ccLexer as Lexer
 from vba_precompiler.vba_ccParser import vba_ccParser as Parser
+from vba_precompiler.compiler_visitor import PrecompilerVisitor as Visitor
 
 
 T = TypeVar('T', bound='Compiler')
@@ -21,7 +22,7 @@ class Compiler:
         ts = CommonTokenStream(lexer)
         parser = Parser(ts)
         program = parser.startRule()
-        visitor = PrecompilerVisitor()
+        visitor = Visitor()
         visitor.env = self.environment
         visitor.ts = ts
         code = visitor.visit(program)
