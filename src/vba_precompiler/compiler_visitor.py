@@ -22,9 +22,8 @@ class PrecompilerVisitor(vba_ccVisitor):
         and comment out the line in the source.
         """
         name = ctx.getChild(2).getText().upper()
-        if name in self.env:
-            pass
-        raise Exception("constant exists: " + name)
+        if name in self.env
+            raise Exception("constant exists: " + name)
         value = self.visit(ctx.getChild(2))
         self.env.update({name: value})
         token = ctx.getChild(1)
