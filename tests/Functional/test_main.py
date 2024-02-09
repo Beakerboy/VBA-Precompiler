@@ -7,7 +7,7 @@ def test_main_file(mocker: MockerFixture) -> None:
     """
     Test that an exception is thrown on a bad file.
     """
-    input_file = "tests/files/project1/Modules/bad.bas"
+    input_file = "tests/files/project1/Modules"
     mocker.patch(
         "sys.argv",
         [
