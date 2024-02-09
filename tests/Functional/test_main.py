@@ -34,7 +34,7 @@ def test_const(mocker: MockerFixture) -> None:
         ],
     )
     main()
-    assert os.path.exists("tests/files/build/project2/Modules/input.bas")
+    assert os.path.exists("./build/project2/Modules/input.bas")
 
 
 def test_alternate_environment() -> None:
