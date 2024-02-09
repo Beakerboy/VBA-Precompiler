@@ -13,6 +13,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         super().__init__()
         self.ts: CommonTokenStream
         self.env = {}
+
     def visitCcConst(self: T,  # noqa: N802
                      ctx: Parser.CcConstContext) -> None:
         """
@@ -25,10 +26,10 @@ class PrecompilerVisitor(vba_ccVisitor):
             raise Exception("constant exists")
         value = self.visit(ctx.value)
         self.env.update({name: value})
-        position = ctx.start
+        start = ctx.start
         # the CONST token is after the start
-        ts.getToken(start + 1).text = "'" + ts.getToken(start + 1).text
-    
+        self.ts.getToken(start + 1).text = "'" + self.ts.getToken(start + 1).text
+
     def visitOpExpr(self: T,  # noqa: N802
                     ctx: Parser.OpExprContext) -> int:
         """
