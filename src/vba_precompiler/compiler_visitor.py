@@ -27,8 +27,8 @@ class PrecompilerVisitor(vba_ccVisitor):
         value = self.visit(ctx.value)
         self.env.update({name: value})
         token = ctx.getChild(1)
-            if token.type != Lexer.CONST:
-                token = ctx.getChild(2)
+        if token.type != Lexer.CONST:
+            token = ctx.getChild(2)
         index = token.tokenIndex
         # the CONST token is after the start
         txt = "'" + self.ts[index].text
