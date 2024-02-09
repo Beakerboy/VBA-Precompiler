@@ -15,7 +15,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         and comment out the line in the source.
         """
         name = ctx.name
-        if not name in self.env[name]:
+        if not name in self.env:
             raise Exception("constant exists")
         value = visit(ctx.value)
         self.env.update({name : value})
