@@ -30,7 +30,7 @@ class Compiler:
         f = open(path, 'r')
         code = ""
         line_end = visitor.le
-        while true:
+        while True:
             line = f.readline()
             if not line:
                 break
