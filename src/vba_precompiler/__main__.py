@@ -46,10 +46,12 @@ def main() -> None:
     env = {"WIN16": win16, "WIN32": win32, "WIN64": win64,
            "MAC": mac, "VBA6": vba6, "VBA7": vba7}
     compiler = Compiler(env)
+    Path(args.output).mkdir(parents=True, exist_ok=True)
     for file_name in file_list:
         new_path = args.output + '/' + os.path.relpath(file_name, args.directory)
         result = compiler.compile(file_name)
         p = Path(new_path).resolve()
+        p.parent.mkdir(parents=True, exist_ok=True)
         with p.open(mode='a') as fi:
             print("saved file: " + new_path, file=sys.stderr)
             fi.write(result)
