@@ -9,7 +9,7 @@ def test_main_file() -> None:
     ]
     main()
     # assert fileExists(output location and name)
-    assert expected and produced files match
+    assert expected_file == "tests/files/"
 
 def test_main_directory() -> None:
     """
