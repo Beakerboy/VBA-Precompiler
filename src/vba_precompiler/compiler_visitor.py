@@ -21,7 +21,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         Add a new value to the environment variables
         and comment out the line in the source.
         """
-        name = ctx.getChild(1).getText().upper()
+        name = ctx.getChild(2).getText().upper()
         if name in self.env:
             pass
         raise Exception("constant exists: " + name)
