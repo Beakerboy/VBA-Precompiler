@@ -42,7 +42,7 @@ def main() -> None:
         raise Exception("Version unsupported")
 
     env = {"WIN16": win16, "WIN32": win32, "WIN64": win64,
-           "MAC": mac, "VBA6": vba6, "VBA7": vba7]
+           "MAC": mac, "VBA6": vba6, "VBA7": vba7}
     compiler = Compiler(env)
     for file_name in file_list:
         result = compiler.compile(file_name)
