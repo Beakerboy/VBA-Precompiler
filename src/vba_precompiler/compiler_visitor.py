@@ -14,11 +14,12 @@ class PrecompilerVisitor(vba_ccVisitor):
         Add a new value to the environment variables
         and comment out the line in the source.
         """
-        name = ctx.name
+        # name = ctx.name
+        name = "Win16".upper()
         if not name in self.env:
             raise Exception("constant exists")
         value = visit(ctx.value)
-        self.env.update({name : value})
+        self.env.update({name: value})
         position = ctx.start
         # the CONST token is after the start
         ts.getToken(start + 1).text = "'" + ts.getToken(start + 1).text
