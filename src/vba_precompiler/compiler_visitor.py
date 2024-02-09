@@ -1,4 +1,4 @@
-from antlr4 import CommonTokenStream, Token
+from antlr4 import Token
 from typing import Any, Dict, TypeVar
 from vba_precompiler.grammar.vba_ccLexer import vba_ccLexer as Lexer
 from vba_precompiler.grammar.vba_ccParser import vba_ccParser as Parser
@@ -12,7 +12,8 @@ class PrecompilerVisitor(vba_ccVisitor):
 
     def __init__(self: T) -> None:
         super().__init__()
-        self.ts: CommonTokenStream
+        self.lines: list = []
+        self.le = ""
         self.env: Dict[str, Any] = {}
 
     def visitCcConst(self: T,  # noqa: N802
@@ -26,11 +27,10 @@ class PrecompilerVisitor(vba_ccVisitor):
             raise Exception("constant exists: " + name)
         value = self.visit(ctx.getChild(2))
         self.env.update({name: value})
-        token = ctx.getChild(1)
-        index = token.symbol.tokenIndex
-        # the CONST token is after the start
-        txt = "'" + self.ts.tokens[index].text
-        self.ts.tokens[index].text = txt
+        const_token = ctx.getChild(1)
+        self.lines.append(const_token.symbol.line)
+        if self.le == "":
+            self.le ='\n'
 
     def visitArithmeticExpression(  # noqa: N802
             self: T,
