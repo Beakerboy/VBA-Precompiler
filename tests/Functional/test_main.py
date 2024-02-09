@@ -21,7 +21,7 @@ def test_reused_identifier(mocker: MockerFixture) -> None:
         main()
 
 
-def test_reused_identifier(mocker: MockerFixture) -> None:
+def test_const(mocker: MockerFixture) -> None:
     """
     Test that a constant line is commented out of the compiled file.
     """
