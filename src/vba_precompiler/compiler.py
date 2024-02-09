@@ -28,8 +28,14 @@ class Compiler:
         lines = visitor.visit(program)
         i = 1
         f = open(path, 'r')
+        code = ""
+        line_end = visitor.le
         while true:
             line = f.readline()
             if not line:
                 break
+            if line in lines:
+                code += "''
+            code += line + line_end
+            i += 1
         return code
