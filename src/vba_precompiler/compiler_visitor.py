@@ -1,4 +1,4 @@
-from antlr4 import CommonTokenStream
+from antlr4 import CommonTokenStream, Token
 from typing import Any, Dict, TypeVar
 from vba_precompiler.grammar.vba_ccLexer import vba_ccLexer as Lexer
 from vba_precompiler.grammar.vba_ccParser import vba_ccParser as Parser
