@@ -53,7 +53,7 @@ def main() -> None:
         new_path = output_path.join(new_file_rel_path)
         result = compiler.compile(file_name)
         new_path.parent.mkdir(parents=True, exist_ok=True)
-        with p.open(mode='a') as fi:
+        with new_path.open(mode='a') as fi:
             print("saved file: " + new_path, file=sys.stderr)
             fi.write(result)
 
