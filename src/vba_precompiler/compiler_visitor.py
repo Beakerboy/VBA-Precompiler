@@ -1,5 +1,5 @@
 from antlr4 import CommonTokenStream
-from typing import TypeVar
+from typing import Any, TypeVar
 from vba_precompoler.vba_ccParser import vba_ccParser as Parser
 from vba_precompiler.vba_ccVisitor import vba_ccVisitor
 
