@@ -1,4 +1,8 @@
+from typing import TypeVar
 from vba_precompiler.vba_ccVisitor import vba_ccVisitor
+
+
+T = TypeVar('T', bound='PrecompilerVisitor')
 
 
 class PrecompilerVisitor(vba_ccVisitor):
