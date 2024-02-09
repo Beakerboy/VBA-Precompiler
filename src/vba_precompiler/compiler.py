@@ -26,6 +26,10 @@ class Compiler:
         visitor = Visitor()
         visitor.env = self.environment
         lines = visitor.visit(program)
+        i = 1
         f = open(path, 'r')
-        
+        while true:
+            line = f.readline()
+            if not line:
+                break
         return code
