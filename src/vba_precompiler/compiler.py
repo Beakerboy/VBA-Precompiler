@@ -18,7 +18,8 @@ class Compiler:
         if Path(path).exists():
             input_stream = FileStream(path)
             lexer = Lexer(input_stream)
-        raise Exception('file does not exist')
+        else:
+            raise Exception('file does not exist')
         ts = CommonTokenStream(lexer)
         parser = Parser(ts)
         program = parser.startRule()
