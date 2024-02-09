@@ -74,4 +74,4 @@ jobs:
         flake8 . --count --show-source --statistics --exclude src/vba_precompiler/grammar
     - name: Static Test with Mypy
       run: |
-        mypy src/
+        mypy --exclude /grammar/ src/
