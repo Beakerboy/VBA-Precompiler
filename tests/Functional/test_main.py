@@ -7,9 +7,26 @@ from vba_precompiler.__main__ import main
 def test_reused_identifier(mocker: MockerFixture) -> None:
     """
     Test that an exception is thrown when attempting to
-    redeclare a constanst.
+    redeclare a constanst that was provided from outside.
     """
     input_file = "tests/files/project1/Modules"
+    mocker.patch(
+        "sys.argv",
+        [
+            "vba_precompiler.py",
+            input_file,
+        ],
+    )
+    with pytest.raises(Exception):
+        main()
+
+
+def test_reused_identifier(mocker: MockerFixture) -> None:
+    """
+    Test that an exception is thrown when attempting to
+    redeclare a constanst that was declared within the file.
+    """
+    input_file = "tests/files/project3/Modules"
     mocker.patch(
         "sys.argv",
         [
