@@ -1,4 +1,5 @@
 import argparse
+import sys
 from pathlib import Path
 from vba_precompiler.compiler import Compiler
 
@@ -53,6 +54,7 @@ def main() -> None:
         new_path.parent.mkdir(parents=True, exist_ok=True)
         with new_path.open(mode='a') as fi:
             fi.write(result)
+            print("Wrote File: " + str(new_path), file=sys.stderr)
 
 
 def find_files(path: Path) -> list:
