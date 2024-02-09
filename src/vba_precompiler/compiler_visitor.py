@@ -33,8 +33,8 @@ class PrecompilerVisitor(vba_ccVisitor):
         txt = "'" + self.ts.tokens[index].text
         self.ts.tokens[index].text = txt
 
-    def visitOpExpr(self: T,  # noqa: N802
-                    ctx: Parser.OpExprContext) -> int:
+    def visitArithmeticExpression(self: T,  # noqa: N802
+                    ctx: Parser.ArithmeticExpressionContext) -> int:
         """
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
@@ -48,8 +48,8 @@ class PrecompilerVisitor(vba_ccVisitor):
         """
         return 0
 
-    def visitRelExpr(self: T,  # noqa: N802
-                     ctx: Parser.RelExprContext) -> bool:
+    def visitRelationExpression(self: T,  # noqa: N802
+                     ctx: Parser.RelationExpressionContext) -> bool:
         """
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
@@ -83,8 +83,8 @@ class PrecompilerVisitor(vba_ccVisitor):
             i += 1
         return code
 
-    def visitAtomExpr(self: T,  # noqa: N802
-                      ctx: Parser.AtomExprContext) -> Any:
+    def visitLiteralExpress(self: T,  # noqa: N802
+                      ctx: Parser.LiteralExpressContext) -> Any:
         # return Integer.valueOf(ctx.getText());
         return 0
 
