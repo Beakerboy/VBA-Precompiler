@@ -45,9 +45,11 @@ def main() -> None:
            "MAC": mac, "VBA6": vba6, "VBA7": vba7}
     compiler = Compiler(env)
     for file_name in file_list:
+        new_path = args.output + os.path.relpath(filename, args.directory)
         result = compiler.compile(file_name)
-        p = Path(args.output).resolve()
+        p = Path(new_path).resolve()
         with p.open(mode='a') as fi:
+            print("saved file: " + new_path)
             fi.write(result)
 
 
