@@ -70,17 +70,21 @@ class PrecompilerVisitor(vba_ccVisitor):
         """
         return False
 
-    def visitStartRule(self: T,  # noqa: N802
-                       ctx: Parser.StartRuleContext) -> str:
+    def visitStartRule(
+            self: T,  # noqa: N802
+            ctx: Parser.StartRuleContext
+    ) -> str:
         super().visitStartRule(ctx)
 
         code = ""
-        size = len(self.ts.tokens)
-        i = 0
-        for token in self.ts.tokens:
-            if i + 1 < size:
-                code += token.text
-            i += 1
+        ts.reset()
+        token = ts.LT(1)
+        assert token is not None
+        while not token.type == Token.EOF:
+            code += token.text
+            ts.consume()
+            token = ts.LT(1)
+            assert token is not None
         return code
 
     def visitLiteralExpress(  # noqa: N802
