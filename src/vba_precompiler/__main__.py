@@ -49,7 +49,7 @@ def main() -> None:
     for file_name in file_list:
         new_file_rel_path = Path(file_name).relative_to(path)
         output_path = Path(args.output).resolve()
-        new_path = output_path.join(new_file_rel_path)
+        new_path = output_path.joinpath(new_file_rel_path)
         result = compiler.compile(file_name)
         new_path.parent.mkdir(parents=True, exist_ok=True)
         with new_path.open(mode='a') as fi:
