@@ -1,4 +1,6 @@
 import argparse
+import os
+import sys
 from pathlib import Path
 from vba_precompiler.compiler import Compiler
 
@@ -49,7 +51,7 @@ def main() -> None:
         result = compiler.compile(file_name)
         p = Path(new_path).resolve()
         with p.open(mode='a') as fi:
-            print("saved file: " + new_path)
+            print("saved file: " + new_path file=sys.stderr)
             fi.write(result)
 
 
