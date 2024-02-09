@@ -30,7 +30,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         const_token = ctx.getChild(1)
         self.lines.append(const_token.symbol.line)
         if self.le == "":
-            self.le ='\n'
+            self.le = '\n'
 
     def visitArithmeticExpression(  # noqa: N802
             self: T,
