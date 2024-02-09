@@ -28,7 +28,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         self.env.update({name: value})
         start = ctx.start
         # the CONST token is after the start
-        txt =  "'" + self.ts.getToken(start + 1).text
+        txt = "'" + self.ts.getToken(start + 1).text
         self.ts.getToken(start + 1).text = txt
 
     def visitOpExpr(self: T,  # noqa: N802
@@ -52,7 +52,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
         op = ctx.op.getText()
-        
+
         switch (op.charAt[0]) {
             case '<': return left < right
             case '>': return left > right
