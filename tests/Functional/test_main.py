@@ -1,11 +1,13 @@
+import os
 import pytest
 from pytest_mock import MockerFixture
 from vba_precompiler.__main__ import main
 
 
-def test_main_file(mocker: MockerFixture) -> None:
+def test_reused_identifier(mocker: MockerFixture) -> None:
     """
-    Test that an exception is thrown on a bad file.
+    Test that an exception is thrown when attempting to
+    redeclare a constanst.
     """
     input_file = "tests/files/project1/Modules"
     mocker.patch(
@@ -19,11 +21,20 @@ def test_main_file(mocker: MockerFixture) -> None:
         main()
 
 
-def test_main_directory() -> None:
+def test_reused_identifier(mocker: MockerFixture) -> None:
     """
-    Test that precompiling a directory processes all files.
+    Test that a constant line is commented out of the compiled file.
     """
-    pass
+    input_file = "tests/files/project2"
+    mocker.patch(
+        "sys.argv",
+        [
+            "vba_precompiler.py",
+            input_file,
+        ],
+    )
+    main()
+    assert os.path.exists("tests/files/build/project2/Modules/input.bas")
 
 
 def test_alternate_environment() -> None:
