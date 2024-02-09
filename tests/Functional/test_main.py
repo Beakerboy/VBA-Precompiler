@@ -55,7 +55,7 @@ def test_const(mocker: MockerFixture) -> None:
     expected_output_path = "./build/Modules/input.bas"
     target_output = "./tests/files/build/input.bas"
     assert os.path.exists(expected_output_path)
-    file=open(expected_output_path,"r")
+    file = open(expected_output_path, "r")
     raise Exception(file.read())
     assert filecmp.cmp(expected_output_path, target_output)
 
