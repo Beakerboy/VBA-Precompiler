@@ -33,8 +33,10 @@ class PrecompilerVisitor(vba_ccVisitor):
         txt = "'" + self.ts.tokens[index].text
         self.ts.tokens[index].text = txt
 
-    def visitArithmeticExpression(self: T,  # noqa: N802
-                                  ctx: Parser.ArithmeticExpressionContext) -> int:
+    def visitArithmeticExpression(  # noqa: N802
+            self: T,
+            ctx: Parser.ArithmeticExpressionContext
+    ) -> int:
         """
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
@@ -83,8 +85,10 @@ class PrecompilerVisitor(vba_ccVisitor):
             i += 1
         return code
 
-    def visitLiteralExpress(self: T,  # noqa: N802
-                            ctx: Parser.LiteralExpressContext) -> Any:
+    def visitLiteralExpress(  # noqa: N802
+            self: T,
+            ctx: Parser.LiteralExpressContext
+    ) -> Any:
         if ctx.start.type == Lexer.BOOLEANLITERAL:
             return ctx.start.text.upper() == 'TRUE'
         return 0
