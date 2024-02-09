@@ -27,7 +27,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         value = self.visit(ctx.getChild(2))
         self.env.update({name: value})
         token = ctx.getChild(1)
-        index = token.tokenIndex
+        index = token.symbol.tokenIndex
         # the CONST token is after the start
         txt = "'" + self.ts.tokens[index].text
         self.ts.tokens[index].text = txt
