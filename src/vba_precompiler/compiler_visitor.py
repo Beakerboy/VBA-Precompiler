@@ -93,6 +93,8 @@ class PrecompilerVisitor(vba_ccVisitor):
             return ctx.start.text.upper() == 'TRUE'
         return 0
 
-    def visitParenthesizedExpression(self: T,  # noqa: N802
-                       ctx: Parser.ParenthesizedExpressionContext) -> Any:
+    def visitParenthesizedExpression(  # noqa: N802
+            self: T,
+            ctx: Parser.ParenthesizedExpressionContext
+    ) -> Any:
         return self.visit(ctx.getChild(1))
