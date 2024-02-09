@@ -1,5 +1,6 @@
 import pytest
 from pytest_mock import MockerFixture
+from vba_precompiler.__main__ import main
 
 
 def test_main_file(mocker: MockerFixture) -> None:
