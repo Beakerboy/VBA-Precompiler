@@ -18,11 +18,13 @@ def test_main_file(mocker: MockerFixture) -> None:
     with pytest.raises(Exception):
         main()
 
+
 def test_main_directory() -> None:
     """
     Test that precompiling a directory processes all files.
     """
     pass
+
 
 def test_alternate_environment() -> None:
     """
