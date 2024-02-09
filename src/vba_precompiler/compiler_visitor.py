@@ -1,5 +1,6 @@
 from antlr4 import CommonTokenStream
 from typing import Any, Dict, TypeVar
+from vba_precompiler.grammar.vba_ccParser import vba_ccLexer as Lexer
 from vba_precompiler.grammar.vba_ccParser import vba_ccParser as Parser
 from vba_precompiler.grammar.vba_ccVisitor import vba_ccVisitor
 
@@ -84,7 +85,8 @@ class PrecompilerVisitor(vba_ccVisitor):
 
     def visitLiteralExpress(self: T,  # noqa: N802
                             ctx: Parser.LiteralExpressContext) -> Any:
-        # return Integer.valueOf(ctx.getText());
+        if ctx.start.type == Lexer.BOOLEANLITERAL:
+            return ctx.start.text.upper() == 'TRUE'
         return 0
 
     def visitParenthesizedExpression(self: T,  # noqa: N802
