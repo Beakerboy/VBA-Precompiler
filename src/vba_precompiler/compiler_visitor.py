@@ -23,7 +23,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         """
         # name = ctx.name
         name = "Win16".upper()
-        if name not in self.env:
+        if name in self.env:
             raise Exception("constant exists")
         value = self.visit(ctx.getChild(2))
         self.env.update({name: value})
