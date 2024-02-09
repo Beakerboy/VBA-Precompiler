@@ -35,7 +35,7 @@ class Compiler:
             if not line:
                 break
             if line in lines:
-                code += "''
+                code += "'"
             code += line + line_end
             i += 1
         return code
