@@ -77,13 +77,13 @@ class PrecompilerVisitor(vba_ccVisitor):
         super().visitStartRule(ctx)
 
         code = ""
-        ts.reset()
-        token = ts.LT(1)
+        self.ts.reset()
+        token = self.ts.LT(1)
         assert token is not None
         while not token.type == Token.EOF:
             code += token.text
-            ts.consume()
-            token = ts.LT(1)
+            self.ts.consume()
+            token = self.ts.LT(1)
             assert token is not None
         return code
 
