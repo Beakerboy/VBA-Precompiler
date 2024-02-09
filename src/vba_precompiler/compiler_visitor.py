@@ -52,7 +52,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         return False
 
     def visitStartRule(self: T, ctx) -> str:
-        'visit each block
+        # visit each block
         this.visit(ctx.block);
 
         code = ""
