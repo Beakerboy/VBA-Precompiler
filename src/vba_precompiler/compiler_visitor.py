@@ -1,7 +1,7 @@
 from vba_precompiler.vba_ccVisitor import vba_ccVisitor
 
 
-class PrecompilerVisitor(vba_ccVisitor)
+class PrecompilerVisitor(vba_ccVisitor):
 
     def visitCcConst(self:T, ctx) -> None:
         """
