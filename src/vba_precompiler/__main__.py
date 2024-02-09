@@ -1,5 +1,4 @@
 import argparse
-import sys
 from pathlib import Path
 from vba_precompiler.compiler import Compiler
 
