@@ -28,7 +28,8 @@ class PrecompilerVisitor(vba_ccVisitor):
         self.env.update({name: value})
         start = ctx.start
         # the CONST token is after the start
-        self.ts.getToken(start + 1).text = "'" + self.ts.getToken(start + 1).text
+        txt =  "'" + self.ts.getToken(start + 1).text
+        self.ts.getToken(start + 1).text = txt
 
     def visitOpExpr(self: T,  # noqa: N802
                     ctx: Parser.OpExprContext) -> int:
@@ -44,7 +45,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             default: raise Exception("Unknown operator " + op)
         """
         return 0
-        
+
     def visitRelExpr(self: T,  # noqa: N802
                      ctx: Parser.RelExprContext) -> bool:
         """
