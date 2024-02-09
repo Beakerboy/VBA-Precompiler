@@ -73,8 +73,7 @@ class PrecompilerVisitor(vba_ccVisitor):
 
     def visitStartRule(self: T,  # noqa: N802
                        ctx: Parser.StartRuleContext) -> str:
-        # visit each block
-        self.visit(ctx.block)
+        super().visitStartRule(ctx)
 
         code = ""
         size = len(self.ts.tokens)
