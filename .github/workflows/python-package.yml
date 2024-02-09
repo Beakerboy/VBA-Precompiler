@@ -31,8 +31,9 @@ jobs:
       run: |
         wget https://raw.githubusercontent.com/Beakerboy/grammars-v4/coverage/vba/vba_cc/vba_cc.g4
         antlr4 -Dlanguage=Python3 -o deliverables -listener -visitor vba_cc.g4
-        ls deliverables
+        stubgen ./deliverable -o ./deliverables
         mv deliverables/*.py src/vba_precompiler
+        mv deliverables/*.pyi src/vba_precompiler
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
