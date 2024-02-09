@@ -1,2 +1,2 @@
 Attribute VB_Name = "Input"
-'#Const Foo="Bar"
+'#Const Bar="foo"
