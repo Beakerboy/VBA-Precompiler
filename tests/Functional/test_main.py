@@ -1,15 +1,21 @@
-def test_main_file() -> None:
+import pytest
+from pytest_mock import MockerFixture
+
+
+def test_main_file(mocker: MockerFixture) -> None:
     """
-    Test that precompiling one file works
-    use default settings
+    Test that an exception is thrown on a bad file.
     """
-    input_file = "tests/files/project1/Modules/input.bas"
-    expected_file = "tests/files/build/input.bas"
-    argv = [
-    ]
-    main()
-    # assert fileExists(output location and name)
-    assert expected_file == "tests/files/"
+    input_file = "tests/files/project1/Modules/bad.bas"
+    mocker.patch(
+        "sys.argv",
+        [
+            "vba_precompiler.py",
+            input_file,
+        ],
+    )
+    with pytest.raises(Exception):
+        main()
 
 def test_main_directory() -> None:
     """
