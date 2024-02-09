@@ -25,11 +25,9 @@ class PrecompilerVisitor(vba_ccVisitor):
         name = "Win16".upper()
         if name not in self.env:
             raise Exception("constant exists")
-        value = self.visit(ctx.value)
+        value = self.visit(ctx.getChild(2))
         self.env.update({name: value})
         token = ctx.getChild(1)
-        if token.type != Lexer.CONST:
-            token = ctx.getChild(2)
         index = token.tokenIndex
         # the CONST token is after the start
         txt = "'" + self.ts.tokens[index].text
