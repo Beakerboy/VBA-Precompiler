@@ -70,8 +70,8 @@ class PrecompilerVisitor(vba_ccVisitor):
         """
         return False
 
-    def visitStartRule(
-            self: T,  # noqa: N802
+    def visitStartRule(  # noqa: N802
+            self: T,
             ctx: Parser.StartRuleContext
     ) -> str:
         super().visitStartRule(ctx)
