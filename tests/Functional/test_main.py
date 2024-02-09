@@ -1,3 +1,4 @@
+import filecmp
 import os
 import pytest
 from pytest_mock import MockerFixture
@@ -51,7 +52,10 @@ def test_const(mocker: MockerFixture) -> None:
         ],
     )
     main()
-    assert os.path.exists("./build/Modules/input.bas")
+    expected_output_path = "./build/Modules/input.bas"
+    target_output = "./tests/files/build/input.bas"
+    assert os.path.exists(expected_output_path)
+    assert filecmp.cmp(expected_output_path, target_output)
 
 
 def test_alternate_environment() -> None:
