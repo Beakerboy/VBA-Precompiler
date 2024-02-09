@@ -1,8 +1,8 @@
 from antlr4 import CommonTokenStream, FileStream
 from pathlib import Path
 from typing import TypeVar
-from vba_precompiler.vba_ccLexer import vba_ccLexer as Lexer
-from vba_precompiler.vba_ccParser import vba_ccParser as Parser
+from vba_precompiler.grammar.vba_ccLexer import vba_ccLexer as Lexer
+from vba_precompiler.grammar.vba_ccParser import vba_ccParser as Parser
 from vba_precompiler.compiler_visitor import PrecompilerVisitor as Visitor
 
 
