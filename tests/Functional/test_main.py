@@ -4,7 +4,7 @@ from pytest_mock import MockerFixture
 from vba_precompiler.__main__ import main
 
 
-def test_reused_identifier(mocker: MockerFixture) -> None:
+def test_reused_ext_identifier(mocker: MockerFixture) -> None:
     """
     Test that an exception is thrown when attempting to
     redeclare a constanst that was provided from outside.
@@ -21,7 +21,7 @@ def test_reused_identifier(mocker: MockerFixture) -> None:
         main()
 
 
-def test_reused_identifier(mocker: MockerFixture) -> None:
+def test_reused_int_identifier(mocker: MockerFixture) -> None:
     """
     Test that an exception is thrown when attempting to
     redeclare a constanst that was declared within the file.
