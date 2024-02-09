@@ -53,7 +53,7 @@ def main() -> None:
         new_path.parent.mkdir(parents=True, exist_ok=True)
         with new_path.open(mode='a') as fi:
             fi.write(result)
-            raise Exception("Wrote File: " + str(new_path))
+            # raise Exception("Wrote File: " + str(new_path))
 
 
 def find_files(path: Path) -> list:
