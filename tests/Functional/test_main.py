@@ -61,7 +61,7 @@ def test_const(mocker: MockerFixture) -> None:
         for line in differ.compare(file_1.readlines(), file_2.readlines()):
             result += line
     raise Exception(result)
-    assert filecmp.cmp(expected_output_path, target_output)
+    # assert filecmp.cmp(expected_output_path, target_output)
 
 
 def test_alternate_environment() -> None:
