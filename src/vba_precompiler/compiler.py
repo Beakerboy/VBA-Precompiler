@@ -25,5 +25,7 @@ class Compiler:
         program = parser.startRule()
         visitor = Visitor()
         visitor.env = self.environment
-        code = visitor.visit(program)
+        lines = visitor.visit(program)
+        f = open(path, 'r')
+        
         return code
