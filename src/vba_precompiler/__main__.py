@@ -48,10 +48,11 @@ def main() -> None:
     compiler = Compiler(env)
     Path(args.output).mkdir(parents=True, exist_ok=True)
     for file_name in file_list:
-        new_path = args.output + '/' + os.path.relpath(file_name, args.directory)
+        new_file_rel_path = Path(file_name).relative_to(path)
+        ouput_path = Path(args.output).resolve()
+        new_path = output_path.join(new_file_rel_path)
         result = compiler.compile(file_name)
-        p = Path(new_path).resolve()
-        p.parent.mkdir(parents=True, exist_ok=True)
+        new_path.parent.mkdir(parents=True, exist_ok=True)
         with p.open(mode='a') as fi:
             print("saved file: " + new_path, file=sys.stderr)
             fi.write(result)
