@@ -1,5 +1,5 @@
 from antlr4 import CommonTokenStream
-from typing import Any, TypeVar
+from typing import Any, Dict, TypeVar
 from vba_precompoler.vba_ccParser import vba_ccParser as Parser
 from vba_precompiler.vba_ccVisitor import vba_ccVisitor
 
@@ -12,7 +12,7 @@ class PrecompilerVisitor(vba_ccVisitor):
     def __init__(self: T) -> None:
         super().__init__()
         self.ts: CommonTokenStream
-        self.env = {}
+        self.env: Dict[str, Any] = {}
 
     def visitCcConst(self: T,  # noqa: N802
                      ctx: Parser.CcConstContext) -> None:
@@ -26,10 +26,13 @@ class PrecompilerVisitor(vba_ccVisitor):
             raise Exception("constant exists")
         value = self.visit(ctx.value)
         self.env.update({name: value})
-        start = ctx.start
+        token = ctx.getChild(1)
+            if token.type != Lexer.CONST:
+                token = ctx.getChild(2)
+        index = token.tokenIndex
         # the CONST token is after the start
-        txt = "'" + self.ts.getToken(start + 1).text
-        self.ts.getToken(start + 1).text = txt
+        txt = "'" + self.ts[index].text
+        self.ts[index].text = txt
 
     def visitOpExpr(self: T,  # noqa: N802
                     ctx: Parser.OpExprContext) -> int:
