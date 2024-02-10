@@ -29,10 +29,6 @@ class PrecompilerVisitor(vba_ccVisitor):
 
         return self.lines
 
-    def visitCcIfBlock(self: T,  # noqa: N802
-                       ctx: Parser.CcIfBlockContext) -> None:
-        self.visitChildren(ctx)
-
     def visitCcConst(self: T,  # noqa: N802
                      ctx: Parser.CcConstContext) -> None:
         """
@@ -73,6 +69,14 @@ class PrecompilerVisitor(vba_ccVisitor):
             self.com_line_stk[-1] = self.NO_COMMENT_FOUND_TRUE
         elif self.com_line_stk[-1] == self.NO_COMMENT_FOUND_TRUE:
             self.com_line_stk[-1] = self.COMMENT_FOUND_TRUE
+
+    def visitCcElse(self: T,  # nowa: N802
+                    ctx: Parser.CcseContext) -> None:
+        else_token = ctx.getChild(1)
+        # comment out the ccelse line
+        self.lines.append(else_token.symbol.line)
+        if self.com_line_stk[-1] == self.COMMENT_NOT_FOUND_TRUE:
+            self.com_line_stk[-1] = self.NO_COMMENT_FOUND_TRUE
 
     def visitCcEndif(self: T,  # noqa: N802
                      ctx: Parser.CcEndifContext) -> None:
