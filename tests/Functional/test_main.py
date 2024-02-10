@@ -95,6 +95,24 @@ def test_missing_if_identifier(mocker: MockerFixture) -> None:
         main()
 
 
+def test_elseif(mocker: MockerFixture) -> None:
+    """
+    Test that a simple if-elseif block works in both directions.
+    """
+    input_dir = "tests/files/project6"
+    mocker.patch(
+        "sys.argv",
+        [
+            "vba_precompiler.py",
+            input_dir,
+        ],
+    )
+    main()
+    expected_output_file = "./build/elseif.bas"
+    target_output = "./tests/files/build/elseif.bas"
+    assert_files_identical(expected_output_file, target_output)
+    
+
 def assert_files_identical(new_file: str, target_output: str) -> bool:
     # if they are the same, just make the assertion
     # if not, raise an exception with details.
