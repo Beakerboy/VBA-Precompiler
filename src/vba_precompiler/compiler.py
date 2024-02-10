@@ -29,13 +29,12 @@ class Compiler:
         i = 1
         f = open(path, 'r')
         code = ""
-        line_end = visitor.le
         while True:
             line = f.readline()
             if not line:
                 break
             if i in lines:
                 code += "'"
-            code += line + line_end
+            code += line
             i += 1
         return code
