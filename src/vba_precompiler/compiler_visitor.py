@@ -102,7 +102,7 @@ class PrecompilerVisitor(vba_ccVisitor):
     ) -> Any:
         name = ctx.start.text.upper()
         if name not in self.env:
-            raise Exception("Constant does not exist: " + name)
+            return False
         return self.env[name]
 
     def visitArithmeticExpression(  # noqa: N802
