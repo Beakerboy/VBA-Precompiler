@@ -109,7 +109,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             self: T,  # noqa: N802
             ctx: Parser.NotOperatorExpressionContext
     ) -> bool:
-        return Not self.visit(ctx.getChild(1))
+        return not self.visit(ctx.getChild(1))
 
     def visitArithmeticExpression(  # noqa: N802
             self: T,
