@@ -78,6 +78,23 @@ def test_boolean_literal_if(mocker: MockerFixture) -> None:
     assert_files_identical(expected_output_file, target_output)
 
 
+def test_missing_if_identifier(mocker: MockerFixture) -> None:
+    """
+    Test that an exception is thrown when an expression contains
+    an unknown identifier.
+    """
+    input_file = "tests/files/project5
+    mocker.patch(
+        "sys.argv",
+        [
+            "vba_precompiler.py",
+            input_file,
+        ],
+    )
+    with pytest.raises(Exception):
+        main()
+
+
 def assert_files_identical(new_file: str, target_output: str) -> bool:
     # if they are the same, just make the assertion
     # if not, raise an exception with details.
