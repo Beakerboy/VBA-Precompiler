@@ -28,7 +28,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         const_token = ctx.getChild(1)
         self.lines.append(const_token.symbol.line)
 
-    def visitCcIf(self: T,
+    def visitCcIf(self: T,  # noqa: N802
                        ctx: Parser.CcIfExpression) -> None:
         const_token = ctx.getChild(1)
         self.lines.append(const_token.symbol.line)
