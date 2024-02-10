@@ -105,6 +105,12 @@ class PrecompilerVisitor(vba_ccVisitor):
             return False
         return self.env[name]
 
+    def visitNotOperatorExpression(
+            self: T,  # noqa: N802
+            ctx: Parser.NotOperatorExpressionContext
+    ) -> bool:
+        return Not self.visit(ctx.getChild(1))
+
     def visitArithmeticExpression(  # noqa: N802
             self: T,
             ctx: Parser.ArithmeticExpressionContext
@@ -143,6 +149,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         """
         return False
 
+    
     def visitLiteralExpress(  # noqa: N802
             self: T,
             ctx: Parser.LiteralExpressContext
