@@ -21,6 +21,18 @@ class PrecompilerVisitor(vba_ccVisitor):
         # stack for logical line comment status
         self.com_line_stk = [self.NO_COMMENT]
 
+    def visitStartRule(  # noqa: N802
+            self: T,
+            ctx: Parser.StartRuleContext
+    ) -> list:
+        super().visitStartRule(ctx)
+
+        return self.lines
+
+    def visitCcIfBlock(self: T,  # noqa: N802
+                       ctx: Parser.CcIfBlockContext) -> None:
+        self.visitChildren(ctx)
+
     def visitCcConst(self: T,  # noqa: N802
                      ctx: Parser.CcConstContext) -> None:
         """
@@ -35,6 +47,10 @@ class PrecompilerVisitor(vba_ccVisitor):
         const_token = ctx.getChild(1)
         self.lines.append(const_token.symbol.line)
 
+    def visitCcIfBlock(self: T,  # noqa: N802
+                       ctx: Parser.CcIfBlockContext) -> None:
+        self.visitChildren(ctx)
+
     def visitCcIf(self: T,  # noqa: N802
                   ctx: Parser.CcIfContext) -> None:
         if_token = ctx.getChild(1)
@@ -47,6 +63,17 @@ class PrecompilerVisitor(vba_ccVisitor):
             self.com_line_stk.append(self.NO_COMMENT_FOUND_TRUE)
         else:
             self.com_line_stk.append(self.COMMENT_NOT_FOUND_TRUE)
+
+    def visitCcElseif(self: T,  # noqa: N802
+                      ctx: Parser.CcElseifContext) -> None:
+        if_token = ctx.getChild(1)
+        # comment out the ccif line
+        self.lines.append(if_token.symbol.line)
+        expression = self.visit(ctx.getChild(2))
+        if (expression and self.com_line_stk[-1] == self.COMMENT_NOT_FOUND_TRUE:
+            self.com_line_stk[-1] = self.NO_COMMENT_FOUND_TRUE
+        elif self.com_line_stk[-1] == self.NO_COMMENT_FOUND_TRUE:
+            self.com_line_stk[-1] = self.COMMENT_FOUND_TRUE
 
     def visitCcEndif(self: T,  # noqa: N802
                      ctx: Parser.CcEndifContext) -> None:
@@ -63,10 +90,6 @@ class PrecompilerVisitor(vba_ccVisitor):
             stop = start + num
             comment_lines = range(start, stop)
             self.lines.extend(comment_lines)
-
-    def visitCcIfBlock(self: T,  # noqa: N802
-                       ctx: Parser.CcIfBlockContext) -> None:
-        self.visitChildren(ctx)
 
     def visitIdentifierExpression(  # noqa: N802
             self: T,
@@ -114,14 +137,6 @@ class PrecompilerVisitor(vba_ccVisitor):
             default: raise Exception("Unknown operator " + op)
         """
         return False
-
-    def visitStartRule(  # noqa: N802
-            self: T,
-            ctx: Parser.StartRuleContext
-    ) -> list:
-        super().visitStartRule(ctx)
-
-        return self.lines
 
     def visitLiteralExpress(  # noqa: N802
             self: T,
