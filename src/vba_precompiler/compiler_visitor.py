@@ -47,7 +47,6 @@ class PrecompilerVisitor(vba_ccVisitor):
             self.com_line_stk.append(self.NO_COMMENT_FOUND_TRUE)
         else:
             self.com_line_stk.append(self.COMMENT_NOT_FOUND_TRUE)
-        
 
     def visitCcEndif(self: T,  # noqa: N802
                      ctx: Parser.CcEndifContext) -> None:
@@ -64,11 +63,11 @@ class PrecompilerVisitor(vba_ccVisitor):
             stop = start + num
             comment_lines = range(start, stop)
             self.lines.extend(comment_lines)
-    
+
     def visitCcIfBlock(self: T,  # noqa: N802
                        ctx: Parser.CcIfBlockContext) -> None:
         self.visitChildren(ctx)
-    
+
     def visitArithmeticExpression(  # noqa: N802
             self: T,
             ctx: Parser.ArithmeticExpressionContext
