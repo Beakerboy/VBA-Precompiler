@@ -8,6 +8,7 @@ T = TypeVar('T', bound='PrecompilerVisitor')
 
 
 class PrecompilerVisitor(vba_ccVisitor):
+    # Enum Values...use enum class instead?
     NO_COMMENT = 0
     NO_COMMENT_FOUND_TRUE = 1
     COMMENT_FOUND_TRUE = 2
