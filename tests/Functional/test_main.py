@@ -56,10 +56,23 @@ def test_const(mocker: MockerFixture) -> None:
     target_output = "./tests/files/build/input.bas"
     assert os.path.exists(expected_output_path)
     assert filecmp.cmp(expected_output_path, target_output)
+    os.remove(expected_output_path)
 
 
-def test_alternate_environment() -> None:
+def test_boolean_literal_if() -> None:
     """
-    Test different enviroment settings.
+    Test that if and endif lines are commented out.
     """
-    pass
+    input_dir = "tests/files/project3"
+    mocker.patch(
+        "sys.argv",
+        [
+            "vba_precompiler.py",
+            input_file,
+        ],
+    )
+    main()
+    expected_output_path = "./build/Modules/input.bas"
+    target_output = "./tests/files/build/project3.bas"
+    assert os.path.exists(expected_output_path)
+    assert filecmp.cmp(expected_output_path, target_output)
