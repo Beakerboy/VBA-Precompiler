@@ -83,7 +83,7 @@ def test_missing_if_identifier(mocker: MockerFixture) -> None:
     Test that an exception is thrown when an expression contains
     an unknown identifier.
     """
-    input_file = "tests/files/project5
+    input_file = "tests/files/project5"
     mocker.patch(
         "sys.argv",
         [
