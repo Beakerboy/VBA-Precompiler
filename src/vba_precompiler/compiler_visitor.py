@@ -12,7 +12,6 @@ class PrecompilerVisitor(vba_ccVisitor):
     def __init__(self: T) -> None:
         super().__init__()
         self.lines: list = []
-        self.le = ""
         self.env: Dict[str, Any] = {}
 
     def visitCcConst(self: T,  # noqa: N802
@@ -28,9 +27,12 @@ class PrecompilerVisitor(vba_ccVisitor):
         self.env.update({name: value})
         const_token = ctx.getChild(1)
         self.lines.append(const_token.symbol.line)
-        if self.le == "":
-            self.le = '\n'
 
+    def visitCcIf(self: T,
+                       ctx: Parser.CcIfExpression) -> None:
+        const_token = ctx.getChild(1)
+        self.lines.append(const_token.symbol.line)
+                           
     def visitArithmeticExpression(  # noqa: N802
             self: T,
             ctx: Parser.ArithmeticExpressionContext
