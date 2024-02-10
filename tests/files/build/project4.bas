@@ -4,5 +4,5 @@ Attribute VB_Name = "Input"
     foo = x
 '#EndIf
 '#If Win32 Then
-'    foo = x
+'    foo = y
 '#EndIf
