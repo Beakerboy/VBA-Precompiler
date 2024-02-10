@@ -26,9 +26,9 @@ def main() -> None:
         mac = True
     elif args.system == "Win16":
         win16 = True
-    elif args.system == "Win22":
+    elif args.system == "Win32":
         win32 = True
-    elif args.system == "Win16":
+    elif args.system == "Win64":
         win32 = True
         win64 = True
     else:
