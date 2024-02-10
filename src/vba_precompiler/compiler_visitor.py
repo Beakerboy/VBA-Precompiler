@@ -59,7 +59,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         if self.com_line_stk[-1] > self.NO_COMMENT_FOUND_TRUE:
             newline_token = ctx.getChild(0)
             num = len(newline_token.symbol.text)
-            start = token.symbol.line + 1
+            start = newline_token.symbol.line + 1
             stop = start + num
             comment_lines = range(start, stop)
             self.lines.extend(comment_lines)
