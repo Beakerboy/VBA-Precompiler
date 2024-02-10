@@ -8,11 +8,17 @@ T = TypeVar('T', bound='PrecompilerVisitor')
 
 
 class PrecompilerVisitor(vba_ccVisitor):
-
+    NO_COMMENT = 0
+    NO_COMMENT_FOUND_TRUE = 1
+    COMMENT_FOUND_TRUE = 2
+    COMMENT_NOT_FOUND_TRUE = 3
+    COMMENT_ALL = 4
+    
     def __init__(self: T) -> None:
         super().__init__()
         self.lines: list = []
         self.env: Dict[str, Any] = {}
+        comment_logical_lines_stack = [NO_COMMENT]
 
     def visitCcConst(self: T,  # noqa: N802
                      ctx: Parser.CcConstContext) -> None:
@@ -23,21 +29,42 @@ class PrecompilerVisitor(vba_ccVisitor):
         name = ctx.getChild(2).getText().upper()
         if name in self.env:
             raise Exception("constant exists: " + name)
-        value = self.visit(ctx.getChild(2))
+        value = self.visit(ctx.getChild(4))
         self.env.update({name: value})
         const_token = ctx.getChild(1)
         self.lines.append(const_token.symbol.line)
+        comment_logical_lines = False
 
     def visitCcIf(self: T,  # noqa: N802
                   ctx: Parser.CcIfContext) -> None:
-        const_token = ctx.getChild(1)
-        self.lines.append(const_token.symbol.line)
+        if_token = ctx.getChild(1)
+        # comment out the ccif line
+        self.lines.append(if_token.symbol.line)
+        expression = self.visit(ctx.getChild(4))
+        if self.comment_logical_lines_stack[-1] > NO_COMMENT_FOUND_TRUE:
+            self.comment_logical_lines_stack.append(COMMENT_ALL)
+        elif expression:
+            self.comment_logical_lines_stack.append(NO_COMMENT_FOUND_TRUE)
+        else:
+            self.comment_logical_lines_stack.append(COMMENT_NOT_FOUND_TRUE)
+        
 
     def visitCcEndif(self: T,  # noqa: N802
                      ctx: Parser.CcEndifContext) -> None:
         const_token = ctx.getChild(1)
         self.lines.append(const_token.symbol.line)
+        self.comment_logical_lines_stack.pop()
 
+    def visitLogicalLine(self: T,  # noqa:N802
+                         ctx: Parser.LogicalLineContext) -> None:
+        if self.comment_logical_lines_stack[-1] > NO_COMMENT_FOUND_TRUE:
+            newline_token = ctx.getChild(0)
+            self.lines.append(token.symbol.line + 1)
+    
+    def visitCcIfBlock(self: T,  # noqa: N802
+                       ctx: Parser.CcIfBlockContext) -> None:
+        self.visitChildren(ctx)
+    
     def visitArithmeticExpression(  # noqa: N802
             self: T,
             ctx: Parser.ArithmeticExpressionContext
