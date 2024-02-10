@@ -34,7 +34,7 @@ class Compiler:
             line = f.readline()
             if not line:
                 break
-            if line in lines:
+            if i in lines:
                 code += "'"
             code += line + line_end
             i += 1
