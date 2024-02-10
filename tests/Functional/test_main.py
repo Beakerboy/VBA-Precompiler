@@ -1,6 +1,6 @@
 import os
 import pytest
-from difflib import Differ
+import filecmp
 from pytest_mock import MockerFixture
 from vba_precompiler.__main__ import main
 
@@ -55,13 +55,7 @@ def test_const(mocker: MockerFixture) -> None:
     expected_output_path = "./build/Modules/input.bas"
     target_output = "./tests/files/build/input.bas"
     assert os.path.exists(expected_output_path)
-    result = ""
-    with open(target_output) as file_1, open(expected_output_path) as file_2:
-        differ = Differ()
-        for line in differ.compare(file_1.readlines(), file_2.readlines()):
-            result += line
-    raise Exception(result)
-    # assert filecmp.cmp(expected_output_path, target_output)
+    assert filecmp.cmp(expected_output_path, target_output)
 
 
 def test_alternate_environment() -> None:
