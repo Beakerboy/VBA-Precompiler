@@ -24,7 +24,7 @@ class Compiler:
         parser = Parser(ts)
         program = parser.startRule()
         visitor = Visitor()
-        visitor.env = self.environment
+        visitor.env = self.environment.copy()
         lines = visitor.visit(program)
         i = 1
         f = open(path, 'r')
