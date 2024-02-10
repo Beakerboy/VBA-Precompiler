@@ -54,7 +54,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         self.lines.append(const_token.symbol.line)
         self.com_line_stk.pop()
 
-    def visitLogicalLine(self: T,  # noqa:N802
+    def visitLogicalLine(self: T,  # noqa: N802
                          ctx: Parser.LogicalLineContext) -> None:
         if self.com_line_stk[-1] > self.NO_COMMENT_FOUND_TRUE:
             newline_token = ctx.getChild(0)
@@ -67,6 +67,13 @@ class PrecompilerVisitor(vba_ccVisitor):
     def visitCcIfBlock(self: T,  # noqa: N802
                        ctx: Parser.CcIfBlockContext) -> None:
         self.visitChildren(ctx)
+
+    def visitIdentifierExpression(self: T,  # noqa: N802
+                                  ctx: Parser.IdentifierExpressionContext) -> Any:
+        name = ctx.start.text.upper()
+        if name not in self.env:
+            raise Exception("Constant does not exist: " + name)
+        return False
 
     def visitArithmeticExpression(  # noqa: N802
             self: T,
