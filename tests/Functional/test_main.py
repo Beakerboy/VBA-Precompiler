@@ -59,7 +59,7 @@ def test_const(mocker: MockerFixture) -> None:
     os.remove(expected_output_path)
 
 
-def test_boolean_literal_if() -> None:
+def test_boolean_literal_if(mocker: MockerFixture) -> None:
     """
     Test that if and endif lines are commented out.
     """
