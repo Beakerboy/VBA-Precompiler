@@ -1,3 +1,4 @@
+import difflib
 import os
 import pytest
 import filecmp
@@ -74,5 +75,24 @@ def test_boolean_literal_if(mocker: MockerFixture) -> None:
     main()
     expected_output_file = "./build/Modules/test.bas"
     target_output = "./tests/files/build/project4.bas"
+    assert_files_identical(expected_output_file, target_output)
+    
+def assert_files_identical(expected_output_file: str, target_output: str) -> bool:
+    # if they are the same, just make the assertion
+    # if not, raise an exception with details.
     assert os.path.exists(expected_output_file)
-    assert filecmp.cmp(expected_output_file, target_output)
+    if filecmp.cmp(expected_output_file, target_output):
+        assert True
+    else:
+        result = ""
+        with open(expected_output_file, 'r') as hosts0:
+            with open(target_output, 'r') as hosts1:
+                diff = difflib.unified_diff(
+                    hosts1.readlines(),
+                    hosts0.readlines(),
+                    fromfile=target_output,
+                    tofile=expected_output_file,
+                )
+                for line in diff:
+                    result += line
+        raise Exception(result)
