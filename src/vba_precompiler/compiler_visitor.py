@@ -70,7 +70,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         elif self.com_line_stk[-1] == self.NO_COMMENT_FOUND_TRUE:
             self.com_line_stk[-1] = self.COMMENT_FOUND_TRUE
 
-    def visitCcElse(self: T,  # nowa: N802
+    def visitCcElse(self: T,  # noqa: N802
                     ctx: Parser.CcseContext) -> None:
         else_token = ctx.getChild(1)
         # comment out the ccelse line
