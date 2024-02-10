@@ -111,7 +111,7 @@ def test_elseif(mocker: MockerFixture) -> None:
     expected_output_file = "./build/elseif.bas"
     target_output = "./tests/files/build/elseif.bas"
     assert_files_identical(expected_output_file, target_output)
-    
+
 
 def assert_files_identical(new_file: str, target_output: str) -> bool:
     # if they are the same, just make the assertion
