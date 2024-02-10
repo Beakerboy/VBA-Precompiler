@@ -68,8 +68,10 @@ class PrecompilerVisitor(vba_ccVisitor):
                        ctx: Parser.CcIfBlockContext) -> None:
         self.visitChildren(ctx)
 
-    def visitIdentifierExpression(self: T,  # noqa: N802
-                                  ctx: Parser.IdentifierExpressionContext) -> Any:
+    def visitIdentifierExpression(  # noqa: N802
+            self: T,
+            ctx: Parser.IdentifierExpressionContext
+    ) -> Any:
         name = ctx.start.text.upper()
         if name not in self.env:
             raise Exception("Constant does not exist: " + name)
