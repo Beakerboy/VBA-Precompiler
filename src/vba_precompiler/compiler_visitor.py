@@ -18,7 +18,8 @@ class PrecompilerVisitor(vba_ccVisitor):
         super().__init__()
         self.lines: list = []
         self.env: Dict[str, Any] = {}
-        comment_logical_lines_stack = [self.NO_COMMENT]
+        # stack for logical line comment status
+        self.com_line_stk = [self.NO_COMMENT]
 
     def visitCcConst(self: T,  # noqa: N802
                      ctx: Parser.CcConstContext) -> None:
@@ -33,7 +34,6 @@ class PrecompilerVisitor(vba_ccVisitor):
         self.env.update({name: value})
         const_token = ctx.getChild(1)
         self.lines.append(const_token.symbol.line)
-        comment_logical_lines = False
 
     def visitCcIf(self: T,  # noqa: N802
                   ctx: Parser.CcIfContext) -> None:
@@ -41,23 +41,23 @@ class PrecompilerVisitor(vba_ccVisitor):
         # comment out the ccif line
         self.lines.append(if_token.symbol.line)
         expression = self.visit(ctx.getChild(4))
-        if self.comment_logical_lines_stack[-1] > self.NO_COMMENT_FOUND_TRUE:
-            self.comment_logical_lines_stack.append(self.COMMENT_ALL)
+        if self.com_line_stk[-1] > self.NO_COMMENT_FOUND_TRUE:
+            self.com_line_stk.append(self.COMMENT_ALL)
         elif expression:
-            self.comment_logical_lines_stack.append(self.NO_COMMENT_FOUND_TRUE)
+            self.com_line_stk.append(self.NO_COMMENT_FOUND_TRUE)
         else:
-            self.comment_logical_lines_stack.append(self.COMMENT_NOT_FOUND_TRUE)
+            self.com_line_stk.append(self.COMMENT_NOT_FOUND_TRUE)
         
 
     def visitCcEndif(self: T,  # noqa: N802
                      ctx: Parser.CcEndifContext) -> None:
         const_token = ctx.getChild(1)
         self.lines.append(const_token.symbol.line)
-        self.comment_logical_lines_stack.pop()
+        self.com_line_stk.pop()
 
     def visitLogicalLine(self: T,  # noqa:N802
                          ctx: Parser.LogicalLineContext) -> None:
-        if self.comment_logical_lines_stack[-1] > self.NO_COMMENT_FOUND_TRUE:
+        if self.com_line_stk[-1] > self.NO_COMMENT_FOUND_TRUE:
             newline_token = ctx.getChild(0)
             self.lines.append(token.symbol.line + 1)
     
