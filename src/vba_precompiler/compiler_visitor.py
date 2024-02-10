@@ -40,7 +40,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         if_token = ctx.getChild(1)
         # comment out the ccif line
         self.lines.append(if_token.symbol.line)
-        expression = self.visit(ctx.getChild(4))
+        expression = self.visit(ctx.getChild(2))
         if self.com_line_stk[-1] > self.NO_COMMENT_FOUND_TRUE:
             self.com_line_stk.append(self.COMMENT_ALL)
         elif expression:
