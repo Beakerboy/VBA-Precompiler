@@ -32,7 +32,12 @@ class PrecompilerVisitor(vba_ccVisitor):
                        ctx: Parser.CcIfExpression) -> None:
         const_token = ctx.getChild(1)
         self.lines.append(const_token.symbol.line)
-                           
+
+    def visitCcEndIf(self: T,  # noqa: N802
+                       ctx: Parser.CcEndIfExpression) -> None:
+        const_token = ctx.getChild(1)
+        self.lines.append(const_token.symbol.line)
+
     def visitArithmeticExpression(  # noqa: N802
             self: T,
             ctx: Parser.ArithmeticExpressionContext
