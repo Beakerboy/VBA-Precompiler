@@ -3,5 +3,5 @@ Attribute VB_Name = "MissingIdentifier"
 '    foo = x
 '#EndIf
 '#If Not FOO Then
-    foo = x
+    foo = y
 '#EndIf
