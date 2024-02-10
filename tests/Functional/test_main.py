@@ -77,6 +77,7 @@ def test_boolean_literal_if(mocker: MockerFixture) -> None:
     target_output = "./tests/files/build/project4.bas"
     assert_files_identical(expected_output_file, target_output)
 
+
 def assert_files_identical(new_file: str, target_output: str) -> bool:
     # if they are the same, just make the assertion
     # if not, raise an exception with details.
