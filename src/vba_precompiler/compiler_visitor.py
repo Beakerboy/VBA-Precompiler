@@ -8,6 +8,7 @@ T = TypeVar('T', bound='PrecompilerVisitor')
 
 
 class PrecompilerVisitor(vba_ccVisitor):
+    # Enum Values...use enum class instead?
     NO_COMMENT = 0
     NO_COMMENT_FOUND_TRUE = 1
     COMMENT_FOUND_TRUE = 2
@@ -102,8 +103,14 @@ class PrecompilerVisitor(vba_ccVisitor):
     ) -> Any:
         name = ctx.start.text.upper()
         if name not in self.env:
-            raise Exception("Constant does not exist: " + name)
+            return False
         return self.env[name]
+
+    def visitNotOperatorExpression(  # noqa: N802
+            self: T,
+            ctx: Parser.NotOperatorExpressionContext
+    ) -> bool:
+        return not self.visit(ctx.getChild(1))
 
     def visitArithmeticExpression(  # noqa: N802
             self: T,
