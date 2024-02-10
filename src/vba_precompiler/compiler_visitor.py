@@ -47,10 +47,6 @@ class PrecompilerVisitor(vba_ccVisitor):
         const_token = ctx.getChild(1)
         self.lines.append(const_token.symbol.line)
 
-    def visitCcIfBlock(self: T,  # noqa: N802
-                       ctx: Parser.CcIfBlockContext) -> None:
-        self.visitChildren(ctx)
-
     def visitCcIf(self: T,  # noqa: N802
                   ctx: Parser.CcIfContext) -> None:
         if_token = ctx.getChild(1)
@@ -71,7 +67,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         self.lines.append(if_token.symbol.line)
         expression = self.visit(ctx.getChild(2))
         if (
-            expression and 
+            expression and
             self.com_line_stk[-1] == self.COMMENT_NOT_FOUND_TRUE
         ):
             self.com_line_stk[-1] = self.NO_COMMENT_FOUND_TRUE
