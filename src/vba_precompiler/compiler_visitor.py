@@ -70,7 +70,10 @@ class PrecompilerVisitor(vba_ccVisitor):
         # comment out the ccif line
         self.lines.append(if_token.symbol.line)
         expression = self.visit(ctx.getChild(2))
-        if (expression and self.com_line_stk[-1] == self.COMMENT_NOT_FOUND_TRUE:
+        if (
+            expression and 
+            self.com_line_stk[-1] == self.COMMENT_NOT_FOUND_TRUE
+        ):
             self.com_line_stk[-1] = self.NO_COMMENT_FOUND_TRUE
         elif self.com_line_stk[-1] == self.NO_COMMENT_FOUND_TRUE:
             self.com_line_stk[-1] = self.COMMENT_FOUND_TRUE
