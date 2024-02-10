@@ -68,7 +68,7 @@ def test_boolean_literal_if() -> None:
         "sys.argv",
         [
             "vba_precompiler.py",
-            input_file,
+            input_dir,
         ],
     )
     main()
