@@ -77,6 +77,8 @@ class PrecompilerVisitor(vba_ccVisitor):
         self.lines.append(else_token.symbol.line)
         if self.com_line_stk[-1] == self.COMMENT_NOT_FOUND_TRUE:
             self.com_line_stk[-1] = self.NO_COMMENT_FOUND_TRUE
+        elif self.com_line_stk[-1] == self.NO_COMMENT_FOUND_TRUE:
+            self.com_line_stk[-1] = self.COMMENT_FOUND_TRUE
 
     def visitCcEndif(self: T,  # noqa: N802
                      ctx: Parser.CcEndifContext) -> None:
