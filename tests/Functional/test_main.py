@@ -78,21 +78,23 @@ def test_boolean_literal_if(mocker: MockerFixture) -> None:
     assert_files_identical(expected_output_file, target_output)
 
 
-def test_missing_if_identifier(mocker: MockerFixture) -> None:
+def test_missing_identifier(mocker: MockerFixture) -> None:
     """
-    Test that an exception is thrown when an expression contains
-    an unknown identifier.
+    Test that an unknown identifier evaluates as False
     """
-    input_file = "tests/files/project5"
+    input_path = "tests/files/project5"
+    file_name = "missing_identifier.bas"
     mocker.patch(
         "sys.argv",
         [
             "vba_precompiler.py",
-            input_file,
+            input_path,
         ],
     )
-    with pytest.raises(Exception):
-        main()
+    main()
+    expected_output_file = "./build/" + file_name
+    target_output = "./tests/files/build/" + file_name
+    assert_files_identical(expected_output_file, target_output)
 
 
 def test_elseif(mocker: MockerFixture) -> None:
