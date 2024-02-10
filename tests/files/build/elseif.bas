@@ -9,3 +9,8 @@ Attribute VB_Name = "Elseif"
 '#Elseif Win16 Then
     foo = y
 '#EndIf
+'#If Win16 Then
+    foo = x
+'#Elseif Win16 Then
+'    foo = y
+'#EndIf
