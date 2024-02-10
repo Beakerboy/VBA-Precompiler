@@ -71,7 +71,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             self.com_line_stk[-1] = self.COMMENT_FOUND_TRUE
 
     def visitCcElse(self: T,  # noqa: N802
-                    ctx: Parser.CcseContext) -> None:
+                    ctx: Parser.CcElseContext) -> None:
         else_token = ctx.getChild(1)
         # comment out the ccelse line
         self.lines.append(else_token.symbol.line)
