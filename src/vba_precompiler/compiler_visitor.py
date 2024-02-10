@@ -72,7 +72,7 @@ class PrecompilerVisitor(vba_ccVisitor):
     def visitStartRule(  # noqa: N802
             self: T,
             ctx: Parser.StartRuleContext
-    ) -> str:
+    ) -> list:
         super().visitStartRule(ctx)
 
         return self.lines
