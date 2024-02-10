@@ -74,5 +74,5 @@ def test_boolean_literal_if(mocker: MockerFixture) -> None:
     main()
     expected_output_file = "./build/Modules/test.bas"
     target_output = "./tests/files/build/project4.bas"
-    assert os.path.exists(expected_output_path)
-    assert filecmp.cmp(expected_output_path, target_output)
+    assert os.path.exists(expected_output_file)
+    assert filecmp.cmp(expected_output_file, target_output)
