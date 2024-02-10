@@ -1,5 +1,4 @@
-Attribute VB_Name = "Input"
-#Const Bar="foo"
+Attribute VB_Name = "Elseif
 #If Win16 Then
     foo = x
 #Elseif Win32 Then
