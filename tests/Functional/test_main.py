@@ -1,9 +1,21 @@
 import difflib
 import os
 import pytest
+import shutil
 import filecmp
 from pytest_mock import MockerFixture
 from vba_precompiler.__main__ import main
+
+
+@pytest.fixture(autouse=True)
+def run_around_tests() -> None:
+    # Code that will run before your test.
+
+    # A test function will be run at this point
+    yield
+
+    # Code that will run after your test.
+    shutil.rmtree('./build')
 
 
 def test_reused_ext_identifier(mocker: MockerFixture) -> None:
