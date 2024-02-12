@@ -122,7 +122,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         left = visit(ctx.expression[0])
         right = visit(ctx.expression[1])
         op = ctx.op.getText()
-        switch (op.getText()) {
+        match (op.getText()) {
             case '*': return left * right
             case '/': return left / right
             case '+': return left + right
@@ -131,26 +131,26 @@ class PrecompilerVisitor(vba_ccVisitor):
         """
         return 0
 
-    def visitRelationExpression(self: T,  # noqa: N802
-                                ctx: Parser.RelationExpressionContext) -> bool:
-        """
-        left = visit(ctx.expression[0])
-        right = visit(ctx.expression[1])
-        op = ctx.op.getText()
+    def visitRelationExpression(  # noqa: N802
+            self: T,
+            ctx: Parser.RelationExpressionContext
+    ) -> bool:
+        left = self.visit(ctx.getChild(1))
+        right = self.visit(ctx.getChild(3))
+        op = ctx.getChild(2).symbol.text
 
-        switch (op.charAt[0]) {
-            case '<': return left < right
-            case '>': return left > right
-            case '=': return left == right
-            case '<>': pass
-            case '><': return left != right
-            case '>=': pass
-            case '=>': return left >= right
-            case '<=': pass
-            case '=<': return left <= right
-            default: raise Exception("Unknown operator " + op)
-        """
-        return False
+        if op == '<':
+            return left < right
+        elif op == '>':
+            return left > right
+        elif op == '=':
+            return left == right
+        elif op == '<>' or op == '><':
+            return left != right
+        elif op == '>=' or op == '=>':
+            return left >= right
+        elif op == '<=' or op == '=<':
+            return left <= right
 
     def visitLiteralExpress(  # noqa: N802
             self: T,
