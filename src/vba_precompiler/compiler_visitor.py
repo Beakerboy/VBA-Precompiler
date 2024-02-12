@@ -118,18 +118,17 @@ class PrecompilerVisitor(vba_ccVisitor):
             self: T,
             ctx: Parser.ArithmeticExpressionContext
     ) -> int:
-        """
-        left = visit(ctx.expression[0])
-        right = visit(ctx.expression[1])
-        op = ctx.op.getText()
-        match (op.getText()) {
-            case '*': return left * right
-            case '/': return left / right
-            case '+': return left + right
-            case '-': return left - right
-            default: raise Exception("Unknown operator " + op)
-        """
-        return 0
+        left = self.visit(ctx.getChild(1))
+        right = self.visit(ctx.getChild(3))
+        op = ctx.getChild(2).symbol.text
+        if op ==  '*':
+            return left * right
+        elif op == '/':
+            return left / right
+        elif op == '+':
+            return left + right
+        elif op == '-':
+            return left - right
 
     def visitRelationExpression(  # noqa: N802
             self: T,
