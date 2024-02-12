@@ -1,7 +1,7 @@
 from typing import Any, Dict, TypeVar
-from vba_precompiler.grammar.vba_ccLexer import vba_ccLexer as Lexer
-from vba_precompiler.grammar.vba_ccParser import vba_ccParser as Parser
-from vba_precompiler.grammar.vba_ccVisitor import vba_ccVisitor
+from antlr4_vba.vba_ccLexer import vba_ccLexer as Lexer
+from antlr4_vba.vba_ccParser import vba_ccParser as Parser
+from antlr4_vba.vba_ccVisitor import vba_ccVisitor
 
 
 T = TypeVar('T', bound='PrecompilerVisitor')
@@ -161,7 +161,7 @@ class PrecompilerVisitor(vba_ccVisitor):
 
     def visitBooleanExpression(  # noqa: N802
             self: T,
-            ctx: Parser.RelationExpressionContext
+            ctx: Parser.BooleanExpressionContext
     ) -> bool:
         left = self.visit(ctx.getChild(1))
         right = self.visit(ctx.getChild(3))

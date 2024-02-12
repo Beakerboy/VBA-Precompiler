@@ -19,6 +19,7 @@ classifiers = [
 dependencies = [
   'antlr4-python3-runtime',
   'antlr4-tools',
+  'antlr4_vba',
 ]
 [project.optional-dependencies]
 tests = [
