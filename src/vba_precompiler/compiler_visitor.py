@@ -154,6 +154,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             self: T,
             ctx: Parser.LiteralExpressContext
     ) -> Any:
+        raise Exception(ctx.start.text)
         if ctx.start.type == Lexer.BOOLEANLITERAL:
             return ctx.start.text.upper() == 'TRUE'
         return 0
