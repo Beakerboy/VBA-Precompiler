@@ -121,7 +121,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         left = self.visit(ctx.getChild(1))
         right = self.visit(ctx.getChild(3))
         op = ctx.getChild(2).symbol.text
-        if op ==  '*':
+        if op == '*':
             return left * right
         elif op == '/':
             return left / right
@@ -133,7 +133,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             return left ** right
         elif op.upper() == 'MOD':
             return left % right
-        else: # op == '\\':
+        else:  # op == '\\':
             return left // right
 
     def visitRelationExpression(  # noqa: N802
@@ -156,7 +156,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             return left >= right
         elif op == '<=' or op == '=<':
             return left <= right
-        else: # LIKE
+        else:  # LIKE
             raise Exception("Currently Unsupported")
 
     def visitBooleanExpression(  # noqa: N802
@@ -174,7 +174,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             return left != right
         elif op == "IMP":
             return not left or right
-        else: # op = "EQV"
+        else:  # op = "EQV"
             return left == right
             
 
