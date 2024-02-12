@@ -117,7 +117,7 @@ class PrecompilerVisitor(vba_ccVisitor):
     def visitArithmeticExpression(  # noqa: N802
             self: T,
             ctx: Parser.ArithmeticExpressionContext
-    ) -> int:
+    ) -> Any:
         left = self.visit(ctx.getChild(1))
         right = self.visit(ctx.getChild(3))
         op = ctx.getChild(2).symbol.text
@@ -158,6 +158,25 @@ class PrecompilerVisitor(vba_ccVisitor):
             return left <= right
         else: # LIKE
             raise Exception("Currently Unsupported")
+
+    def visitBooleanExpression(  # noqa: N802
+            self: T,
+            ctx: Parser.RelationExpressionContext
+    ) -> bool:
+        left = self.visit(ctx.getChild(1))
+        right = self.visit(ctx.getChild(3))
+        op = ctx.getChild(2).symbol.text.upper()
+        if op == "AND":
+            return left and right
+        elifif op == "OR":
+            return left or right
+        elifif op == "XOR":
+            return left != right
+        elifif op == "IMP":
+            return not left or right
+        else: # op = "EQV"
+            return left == right
+            
 
     def visitLiteralExpress(  # noqa: N802
             self: T,
