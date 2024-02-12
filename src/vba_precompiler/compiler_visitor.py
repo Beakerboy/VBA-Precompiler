@@ -133,9 +133,8 @@ class PrecompilerVisitor(vba_ccVisitor):
             return left ** right
         elif op.upper() == 'MOD':
             return left % right
-        elif op == '\\':
+        else: # op == '\\':
             return left // right
-        
 
     def visitRelationExpression(  # noqa: N802
             self: T,
