@@ -176,7 +176,6 @@ class PrecompilerVisitor(vba_ccVisitor):
             return not left or right
         else:  # op = "EQV"
             return left == right
-            
 
     def visitLiteralExpress(  # noqa: N802
             self: T,
