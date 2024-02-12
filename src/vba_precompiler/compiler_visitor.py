@@ -161,7 +161,7 @@ class PrecompilerVisitor(vba_ccVisitor):
 
     def visitBooleanExpression(  # noqa: N802
             self: T,
-            ctx: Parser.RelationExpressionContext
+            ctx: Parser.BooleanExpressionContext
     ) -> bool:
         left = self.visit(ctx.getChild(1))
         right = self.visit(ctx.getChild(3))
