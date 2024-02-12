@@ -102,7 +102,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             ctx: Parser.IdentifierExpressionContext
     ) -> Any:
         name = ctx.start.text.upper()
-        if name == "TRUE"
+        if name == "TRUE":
             raise Exception("Name is True‽")
         if name not in self.env:
             return False
