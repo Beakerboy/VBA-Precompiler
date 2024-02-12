@@ -149,7 +149,7 @@ def test_literals(mocker: MockerFixture) -> None:
     """
     Test that an unknown identifier evaluates as False
     """
-    input_path = "tests/files/project"
+    input_path = "tests/files/project0"
     file_name = "literal.bas"
     mocker.patch(
         "sys.argv",
