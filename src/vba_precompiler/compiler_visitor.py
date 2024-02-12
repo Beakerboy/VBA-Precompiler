@@ -149,7 +149,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             return left != right
         elif op == '>=' or op == '=>':
             return left >= right
-        elif op == '<=' or op == '=<':
+        else: # op == '<=' or op == '=<':
             return left <= right
 
     def visitLiteralExpress(  # noqa: N802
