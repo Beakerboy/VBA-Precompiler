@@ -168,11 +168,11 @@ class PrecompilerVisitor(vba_ccVisitor):
         op = ctx.getChild(2).symbol.text.upper()
         if op == "AND":
             return left and right
-        elifif op == "OR":
+        elif op == "OR":
             return left or right
-        elifif op == "XOR":
+        elif op == "XOR":
             return left != right
-        elifif op == "IMP":
+        elif op == "IMP":
             return not left or right
         else: # op = "EQV"
             return left == right
