@@ -52,7 +52,7 @@ def main() -> None:
         new_path = output_path.joinpath(new_file_rel_path)
         try:
             result = compiler.compile(file_name)
-        except:
+        except Exception as ex:
             print("File Failed: " + file_name, file=sys.stderr)
         else:
             new_path.parent.mkdir(parents=True, exist_ok=True)
