@@ -91,7 +91,7 @@ class PrecompilerVisitor(vba_ccVisitor):
                          ctx: Parser.LogicalLineContext) -> None:
         if self.com_line_stk[-1] > self.NO_COMMENT_FOUND_TRUE:
             newline_token = ctx.getChild(0)
-            num = len(newline_token.symbol.text)
+            num = len(self.split_nl(newline_token.symbol.text))
             start = newline_token.symbol.line + 1
             stop = start + num
             comment_lines = range(start, stop)
@@ -192,3 +192,19 @@ class PrecompilerVisitor(vba_ccVisitor):
             ctx: Parser.ParenthesizedExpressionContext
     ) -> Any:
         return self.visit(ctx.getChild(1))
+
+    def split_nl(self: T, nl: str) -> list:
+        """
+        split a newline token into separate line-end characters.
+        """
+        num = len(nl)
+        i = 0
+        result = []
+        while i < num:
+            if num >= 2 and nl[i:i+2] == '\r\n':
+                result.append('\r\n')
+                i += 2
+            else:
+                result.append(nl[i:i+1])
+                i += 1
+        return result
