@@ -1,4 +1,5 @@
 import argparse
+import sys
 from pathlib import Path
 from vba_precompiler.compiler import Compiler
 
@@ -49,11 +50,14 @@ def main() -> None:
         new_file_rel_path = Path(file_name).relative_to(path)
         output_path = Path(args.output).resolve()
         new_path = output_path.joinpath(new_file_rel_path)
-        result = compiler.compile(file_name)
-        new_path.parent.mkdir(parents=True, exist_ok=True)
-        with new_path.open(mode='a') as fi:
-            fi.write(result)
-            # raise Exception("Wrote File: " + str(new_path))
+        try:
+            result = compiler.compile(file_name)
+        except:
+            print("File Failed: " + file_name, file=sys.stderr)
+        else:
+            new_path.parent.mkdir(parents=True, exist_ok=True)
+            with new_path.open(mode='a') as fi:
+                fi.write(result)
 
 
 def find_files(path: Path) -> list:
