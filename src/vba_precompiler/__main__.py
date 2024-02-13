@@ -53,7 +53,7 @@ def main() -> None:
         try:
             result = compiler.compile(file_name)
         except Exception as e:
-            print("File Failed: " + file_name, file=sys.stderr)
+            print("File Failed: " + str(file_name), file=sys.stderr)
             print(str(e), file=sys.stderr)
         else:
             new_path.parent.mkdir(parents=True, exist_ok=True)
