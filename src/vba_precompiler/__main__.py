@@ -43,7 +43,7 @@ def main() -> None:
         raise Exception("Version unsupported")
 
     env = {"WIN16": win16, "WIN32": win32, "WIN64": win64,
-           "MAC": mac, "VBA6": vba6, "VBA7": vba7}
+           "MAC": mac, "VBA6": vba6, "VBA7": vba7, "MAC_OFFICE_VERSION": 0}
     compiler = Compiler(env)
     Path(args.output).mkdir(parents=True, exist_ok=True)
     for file_name in file_list:
