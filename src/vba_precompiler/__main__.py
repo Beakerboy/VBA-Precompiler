@@ -65,6 +65,7 @@ def main() -> None:
         exit_code = 1
         sys.exit(exit_code)
 
+
 def find_files(path: Path) -> list:
     """
     Find all gives of given types within a directory
