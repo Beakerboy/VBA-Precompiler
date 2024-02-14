@@ -31,7 +31,7 @@ def test_reused_ext_identifier(mocker: MockerFixture) -> None:
             input_file,
         ],
     )
-    with pytest.raises(Exception):
+    with pytest.raises(SystemExit):
         main()
 
 
@@ -48,7 +48,7 @@ def test_reused_int_identifier(mocker: MockerFixture) -> None:
             input_file,
         ],
     )
-    with pytest.raises(Exception):
+    with pytest.raises(SystemExit):
         main()
 
 
