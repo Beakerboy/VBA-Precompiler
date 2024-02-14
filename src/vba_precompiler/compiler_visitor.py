@@ -185,6 +185,8 @@ class PrecompilerVisitor(vba_ccVisitor):
             return ctx.start.text.upper() == 'TRUE'
         elif ctx.start.type == Lexer.STRINGLITERAL:
             return ctx.start.text[1:-1]
+        elif ctx.start.type == Lexer.INTEGERLITERAL:
+            return int(ctx.start.text)
         return 0
 
     def visitParenthesizedExpression(  # noqa: N802
