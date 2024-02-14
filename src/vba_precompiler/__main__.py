@@ -40,7 +40,7 @@ def main() -> None:
     elif args.version == "7":
         vba7 = True
     else:
-        raise Exception("Version unsupported: " + args.version)
+        raise Exception("Version unsupported: " + str(args.version))
 
     env = {"WIN16": win16, "WIN32": win32, "WIN64": win64,
            "MAC": mac, "VBA6": vba6, "VBA7": vba7, "MAC_OFFICE_VERSION": 0}
