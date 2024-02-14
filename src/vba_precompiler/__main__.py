@@ -46,6 +46,7 @@ def main() -> None:
            "MAC": mac, "VBA6": vba6, "VBA7": vba7, "MAC_OFFICE_VERSION": 0}
     compiler = Compiler(env)
     Path(args.output).mkdir(parents=True, exist_ok=True)
+    num_errors = 0
     for file_name in file_list:
         new_file_rel_path = Path(file_name).relative_to(path)
         output_path = Path(args.output).resolve()
@@ -55,11 +56,14 @@ def main() -> None:
         except Exception as e:
             print("File Failed: " + str(file_name), file=sys.stderr)
             print(str(e), file=sys.stderr)
+            num_errors += 1
         else:
             new_path.parent.mkdir(parents=True, exist_ok=True)
             with new_path.open(mode='a') as fi:
                 fi.write(result)
-
+    if num_errors > 0:
+        exit_code = 1
+        sys.exit(exit_code)
 
 def find_files(path: Path) -> list:
     """
