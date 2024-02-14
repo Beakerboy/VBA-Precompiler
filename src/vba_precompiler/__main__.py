@@ -34,10 +34,10 @@ def main() -> None:
         win64 = True
     else:
         raise Exception("version unsupported: " + args.system)
-    if args.version == "6":
+    if args.version == 6:
         if win32 or mac:
             vba6 = True
-    elif args.version == "7":
+    elif args.version == 7:
         vba7 = True
     else:
         raise Exception("Version unsupported: " + str(args.version))
