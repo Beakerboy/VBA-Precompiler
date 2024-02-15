@@ -221,7 +221,7 @@ def test_relational_operators(mocker: MockerFixture) -> None:
     assert_files_identical(expected_output_file, target_output)
 
 
-def test_relational_operators(mocker: MockerFixture) -> None:
+def test_boolean_operators(mocker: MockerFixture) -> None:
     """
     Test that an the arithmetic operators work as expected.
     """
