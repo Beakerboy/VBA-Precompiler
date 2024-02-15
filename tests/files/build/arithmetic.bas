@@ -10,3 +10,11 @@ Attribute VB_Name = "Arithmetic"
 '#elseif 4 / 1 = 3 Then
 '    foo = 3
 '#endif
+
+'#if 1 ^ 2 = 3 Then
+'    foo = 2
+'#elseif 2 Mod 3 = 7 Then
+'    foo = 3
+'#elseif 5 \ 2 = 2 Then
+    foo = 4
+'#endif
