@@ -140,9 +140,9 @@ class PrecompilerVisitor(vba_ccVisitor):
             self: T,
             ctx: Parser.RelationExpressionContext
     ) -> bool:
-        left = self.visit(ctx.getChild(1))
-        right = self.visit(ctx.getChild(3))
-        op = ctx.getChild(2).symbol.text
+        left = self.visit(ctx.getChild(0))
+        right = self.visit(ctx.getChild(2))
+        op = ctx.getChild(1).symbol.text
 
         if op == '<':
             return left < right
