@@ -118,9 +118,9 @@ class PrecompilerVisitor(vba_ccVisitor):
             self: T,
             ctx: Parser.ArithmeticExpressionContext
     ) -> Any:
-        left = self.visit(ctx.getChild(1))
-        right = self.visit(ctx.getChild(3))
-        op = ctx.getChild(2).symbol.text
+        left = self.visit(ctx.getChild(0))
+        right = self.visit(ctx.getChild(2))
+        op = ctx.getChild(1).symbol.text
         if op == '*':
             return left * right
         elif op == '/':
@@ -163,9 +163,9 @@ class PrecompilerVisitor(vba_ccVisitor):
             self: T,
             ctx: Parser.BooleanExpressionContext
     ) -> bool:
-        left = self.visit(ctx.getChild(1))
-        right = self.visit(ctx.getChild(3))
-        op = ctx.getChild(2).symbol.text.upper()
+        left = self.visit(ctx.getChild(0))
+        right = self.visit(ctx.getChild(2))
+        op = ctx.getChild(1).symbol.text.upper()
         if op == "AND":
             return left and right
         elif op == "OR":
