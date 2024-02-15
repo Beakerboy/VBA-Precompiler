@@ -1,4 +1,4 @@
-Attribute VB_Name = "Relational"
+Attribute VB_Name = "Boolean
 #if True And True Then
     foo = 2
 #endif
