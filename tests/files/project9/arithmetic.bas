@@ -11,10 +11,12 @@ Attribute VB_Name = "Arithmetic"
     foo = 3
 #endif
 
-#if 1 ^ 2 = 3 Then
-    foo = 2
-#elseif 2 Mod 3 = 7 Then
+#if 2 Mod 3 = 7 Then
     foo = 3
 #elseif 5 \ 2 = 2 Then
     foo = 4
+#endif
+
+#if 2 ^ 2 = 4 Then
+    foo = 2
 #endif
