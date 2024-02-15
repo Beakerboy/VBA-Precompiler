@@ -8,7 +8,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--system", default="Win16",
                         help="Mac, Win16, Win32, or Win64")
-    parser.add_argument("-v", "--version", default=6,
+    parser.add_argument("-v", "--version", default="6",
                         help="VBA version, 6 or 7")
     parser.add_argument("-o", "--output", default="./build",
                         help="Output directory")
@@ -34,13 +34,13 @@ def main() -> None:
         win64 = True
     else:
         raise Exception("OS Type Unsupported: " + args.system)
-    if args.version == 6:
+    if args.version == "6":
         if win32 or mac:
             vba6 = True
-    elif args.version == 7:
+    elif args.version == "7":
         vba7 = True
     else:
-        raise Exception("VBA Version Unsupported: " + str(args.version) + " " + str(type(args.version)))
+        raise Exception("VBA Version Unsupported: " + args.version)
 
     env = {"WIN16": win16, "WIN32": win32, "WIN64": win64,
            "MAC": mac, "VBA6": vba6, "VBA7": vba7, "MAC_OFFICE_VERSION": 0}
