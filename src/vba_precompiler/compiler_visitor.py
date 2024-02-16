@@ -221,6 +221,18 @@ class PrecompilerVisitor(vba_ccVisitor):
         vba special chars are ?*[#
         python special chars are .^$*+()[]|
         """
+        # escape slashes
+        pattern = pattern.replace(r"\", r"\\")
+
+        # replace # with temp
+        pattern = pattern.replace("[#]", "\x00")
+
+        # replace # with \d
+        pattern = pattern.replace("*", r"\d")
+
+        # replace temp with #
+        pattern = pattern.replace("\x00", "#")
+        
         # replace period with temp
         pattern = pattern.replace(".", "\x00")
 
