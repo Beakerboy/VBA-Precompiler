@@ -1,3 +1,4 @@
+import re
 from typing import Any, Dict, Type, TypeVar
 from antlr4_vba.vba_ccLexer import vba_ccLexer as Lexer
 from antlr4_vba.vba_ccParser import vba_ccParser as Parser
@@ -213,27 +214,29 @@ class PrecompilerVisitor(vba_ccVisitor):
         return result
 
     @classmethod
-    def like_to_regex(cls: Type[T], expression: str) -> str:
+    def like_to_regex(cls: Type[T], pattern: str) -> str:
         """
         Convert a microsoft VBA like matching string into
         a python regex string.
+        vba special chars are ?*
+        python special chars are .^$*+()[]|
         """
         # replace period with temp
-        expression = expression.replace(".", "\x00")
+        pattern = pattern.replace(".", "\x00")
 
         # replace ? with .
-        expression = expression.replace("?", ".")
+        pattern = pattern.replace("?", ".")
 
         # replace temp with \.
-        expression = expression.replace("\x00", "\\.")
+        pattern = pattern.replace("\x00", "\\.")
 
         # replace * with temp
-        expression = expression.replace("[*]", "\x00")
+        pattern = pattern.replace("[*]", "\x00")
 
         # replace * with .*
-        expression = expression.replace("*", ".*")
+        pattern = pattern.replace("*", ".*")
 
         # replace temp with \*
-        expression = expression.replace("\x00", "\\*")
+        pattern = pattern.replace("\x00", "\\*")
 
-        return expression
+        return pattern
