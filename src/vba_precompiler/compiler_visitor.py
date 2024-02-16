@@ -218,7 +218,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         """
         Convert a microsoft VBA like matching string into
         a python regex string.
-        vba special chars are ?*
+        vba special chars are ?*[#
         python special chars are .^$*+()[]|
         """
         # replace period with temp
