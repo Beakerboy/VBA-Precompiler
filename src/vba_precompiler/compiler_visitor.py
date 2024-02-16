@@ -219,21 +219,21 @@ class PrecompilerVisitor(vba_ccVisitor):
         a python regex string.
         """
         # replace period with temp
-        expression.replace(".", "\x00")
+        expression = expression.replace(".", "\x00")
 
         # replace ? with .
-        expression.replace("?", ".")
+        expression = expression.replace("?", ".")
 
         # replace temp with \.
-        expression.replace("\x00", "\\.")
+        expression = expression.replace("\x00", "\\.")
 
         # replace * with temp
-        expression.replace("*", "\x00")
+        expression = expression.replace("*", "\x00")
 
         # replace * with .*
-        expression.replace("*", ".*")
+        expression = expression.replace("*", ".*")
 
         # replace temp with \*
-        expression.replace("\x00", "\\*")
+        expression = expression.replace("\x00", "\\*")
 
         return expression
