@@ -228,7 +228,7 @@ class PrecompilerVisitor(vba_ccVisitor):
         expression = expression.replace("\x00", "\\.")
 
         # replace * with temp
-        expression = expression.replace("*", "\x00")
+        expression = expression.replace("[*]", "\x00")
 
         # replace * with .*
         expression = expression.replace("*", ".*")
