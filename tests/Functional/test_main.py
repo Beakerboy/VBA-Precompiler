@@ -90,7 +90,7 @@ def test_boolean_literal_if(mocker: MockerFixture) -> None:
     assert_files_identical(expected_output_file, target_output)
 
 
-def test_boolean_literal_if(mocker: MockerFixture) -> None:
+def test_win32(mocker: MockerFixture) -> None:
     """
     Test that one file has different output if the environment
     changes.
