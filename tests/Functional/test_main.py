@@ -280,6 +280,27 @@ def test_parenthesis(mocker: MockerFixture) -> None:
     assert_files_identical(expected_output_file, target_output)
 
 
+def test_nesting(mocker: MockerFixture) -> None:
+    """
+    Test that nesting if blocks works.
+    """
+    input_path = "tests/files/project13"
+    file_name = "nested.bas"
+    mocker.patch(
+        "sys.argv",
+        [
+            "vba_precompiler.py",
+            input_path,
+            "-sWin64",
+            "-v7",
+        ],
+    )
+    main()
+    expected_output_file = "./build/" + file_name
+    target_output = "./tests/files/build/" + file_name
+    assert_files_identical(expected_output_file, target_output)
+
+
 def assert_files_identical(new_file: str, target_output: str) -> bool:
     # if they are the same, just make the assertion
     # if not, raise an exception with details.
