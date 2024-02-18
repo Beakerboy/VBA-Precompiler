@@ -291,6 +291,8 @@ def test_nesting(mocker: MockerFixture) -> None:
         [
             "vba_precompiler.py",
             input_path,
+            "-sWin64",
+            "-v7",
         ],
     )
     main()
