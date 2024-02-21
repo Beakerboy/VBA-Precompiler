@@ -192,7 +192,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             # need to manage type conversion.
             return float(ctx.start.text)
         elif ctx.start.type == Lexer.DATELITERAL:
-            return time.strptime(ctx.start.text[1:-1]
+            return time.strptime(ctx.start.text[1:-1])
         # Nothing, Empty or Null
         raise Exception("Nothing, Empty, and Null is not supported")
 
