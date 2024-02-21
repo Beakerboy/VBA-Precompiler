@@ -194,6 +194,7 @@ class PrecompilerVisitor(vba_ccVisitor):
     ) -> Any:
         return self.visit(ctx.getChild(1))
 
+    @classmethod
     def split_nl(cls: Type[T], nl: str) -> list:
         """
         split a newline token into separate line-end characters.
