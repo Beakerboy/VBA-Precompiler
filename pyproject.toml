@@ -32,6 +32,7 @@ tests = [
   'pytest-cov',
   'pytest-mock',
   'types-antlr4-python3-runtime',
+  'types-python-dateutil',
 ]
 [project.urls]
 "Homepage" = "https://github.com/Beakerboy/VBA-Precompiler"
