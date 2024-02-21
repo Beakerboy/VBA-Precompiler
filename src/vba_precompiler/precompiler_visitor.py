@@ -1,4 +1,4 @@
-import dateutil
+from dateutil.parser import parser
 from typing import Any, Dict, Type, TypeVar
 from antlr4_vba.vba_ccLexer import vba_ccLexer as Lexer
 from antlr4_vba.vba_ccParser import vba_ccParser as Parser
@@ -192,7 +192,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             # need to manage type conversion.
             return float(ctx.start.text)
         elif ctx.start.type == Lexer.DATELITERAL:
-            return dateutil.parser.parse(ctx.start.text[1:-1])
+            return parse(ctx.start.text[1:-1])
         # Nothing, Empty or Null
         raise Exception("Nothing, Empty, and Null is not supported")
 
