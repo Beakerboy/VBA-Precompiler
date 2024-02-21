@@ -1,4 +1,5 @@
-from typing import Any, Dict, TypeVar
+import re
+from typing import Any, Dict, Type, TypeVar
 from antlr4_vba.vba_ccLexer import vba_ccLexer as Lexer
 from antlr4_vba.vba_ccParser import vba_ccParser as Parser
 from antlr4_vba.vba_ccVisitor import vba_ccVisitor
@@ -91,7 +92,9 @@ class PrecompilerVisitor(vba_ccVisitor):
                          ctx: Parser.LogicalLineContext) -> None:
         if self.com_line_stk[-1] > self.NO_COMMENT_FOUND_TRUE:
             newline_token = ctx.getChild(0)
-            num = len(self.split_nl(newline_token.symbol.text))
+            newline_text = newline_token.symbol.text
+            newlines = PrecompilerVisitor.split_nl(newline_text)
+            num = len(newlines)
             start = newline_token.symbol.line + 1
             stop = start + num
             comment_lines = range(start, stop)
@@ -193,7 +196,8 @@ class PrecompilerVisitor(vba_ccVisitor):
     ) -> Any:
         return self.visit(ctx.getChild(1))
 
-    def split_nl(self: T, nl: str) -> list:
+    @classmethod
+    def split_nl(cls: Type[T], nl: str) -> list:
         """
         split a newline token into separate line-end characters.
         """
@@ -208,3 +212,43 @@ class PrecompilerVisitor(vba_ccVisitor):
                 result.append(nl[i:i+1])
                 i += 1
         return result
+
+    @classmethod
+    def like_to_regex(cls: Type[T], pattern: str) -> str:
+        """
+        Convert a microsoft VBA like matching string into
+        a python regex string.
+        vba special chars are ?*[#
+        python special chars are .^$*+()[]|
+        """
+        # escape slashes
+        pattern = pattern.replace(r"\", r"\\")
+
+        # replace # with temp
+        pattern = pattern.replace("[#]", "\x00")
+
+        # replace # with \d
+        pattern = pattern.replace("*", r"\d")
+
+        # replace temp with #
+        pattern = pattern.replace("\x00", "#")
+        
+        # replace period with temp
+        pattern = pattern.replace(".", "\x00")
+
+        # replace ? with .
+        pattern = pattern.replace("?", ".")
+
+        # replace temp with \.
+        pattern = pattern.replace("\x00", "\\.")
+
+        # replace * with temp
+        pattern = pattern.replace("[*]", "\x00")
+
+        # replace * with .*
+        pattern = pattern.replace("*", ".*")
+
+        # replace temp with \*
+        pattern = pattern.replace("\x00", "\\*")
+
+        return pattern
