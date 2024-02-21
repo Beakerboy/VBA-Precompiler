@@ -128,7 +128,7 @@ def test_mac(mocker: MockerFixture) -> None:
     )
     main()
     expected_output_file = "./build/Modules/test.bas"
-    target_output = "./tests/files/build/project4_Mac.bas"
+    target_output = "./tests/files/build/project4_mac.bas"
     assert_files_identical(expected_output_file, target_output)
 
 
