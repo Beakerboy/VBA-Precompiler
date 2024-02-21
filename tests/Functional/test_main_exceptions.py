@@ -14,6 +14,7 @@ def test_unsupported_system(mocker: MockerFixture) -> None:
         [
             "vba_precompiler.py",
             "-sFoo",
+            input_file
         ],
     )
     with pytest.raises(Exception):
@@ -30,7 +31,8 @@ def test_unsupported_version(mocker: MockerFixture) -> None:
         "sys.argv",
         [
             "vba_precompiler.py",
-            "-v2",
+            "-v2",,
+            input_file
         ],
     )
     with pytest.raises(Exception):
