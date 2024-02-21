@@ -111,7 +111,7 @@ def test_win32(mocker: MockerFixture) -> None:
     assert_files_identical(expected_output_file, target_output)
 
 
-def test_win32(mocker: MockerFixture) -> None:
+def test_mac(mocker: MockerFixture) -> None:
     """
     Test that one file has different output if the environment
     changes.
@@ -128,7 +128,7 @@ def test_win32(mocker: MockerFixture) -> None:
     )
     main()
     expected_output_file = "./build/Modules/test.bas"
-    target_output = "./tests/files/build/project4_32.bas"
+    target_output = "./tests/files/build/project4_Mac.bas"
     assert_files_identical(expected_output_file, target_output)
 
 
