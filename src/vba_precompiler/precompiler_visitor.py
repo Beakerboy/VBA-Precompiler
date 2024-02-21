@@ -1,3 +1,4 @@
+import time
 from typing import Any, Dict, Type, TypeVar
 from antlr4_vba.vba_ccLexer import vba_ccLexer as Lexer
 from antlr4_vba.vba_ccParser import vba_ccParser as Parser
@@ -185,7 +186,13 @@ class PrecompilerVisitor(vba_ccVisitor):
         elif ctx.start.type == Lexer.STRINGLITERAL:
             return ctx.start.text[1:-1]
         elif ctx.start.type == Lexer.INTEGERLITERAL:
+            # need to manage oct, hex, and type-convesion
             return int(ctx.start.text)
+        elif ctx.start.type == Lexer.FLOATLITERAL:
+            # need to manage type conversion.
+            return float(ctx.start.text)
+        elif ctx.start.type == Lexer.DATELITERAL:
+            return time.strptime(ctx.start.text)
         return 0
 
     def visitParenthesizedExpression(  # noqa: N802
