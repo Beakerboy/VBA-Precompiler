@@ -111,6 +111,27 @@ def test_win32(mocker: MockerFixture) -> None:
     assert_files_identical(expected_output_file, target_output)
 
 
+def test_win32(mocker: MockerFixture) -> None:
+    """
+    Test that one file has different output if the environment
+    changes.
+    """
+    input_dir = "tests/files/project4"
+    mocker.patch(
+        "sys.argv",
+        [
+            "vba_precompiler.py",
+            input_dir,
+            "-sMac",
+            "-v6",
+        ],
+    )
+    main()
+    expected_output_file = "./build/Modules/test.bas"
+    target_output = "./tests/files/build/project4_32.bas"
+    assert_files_identical(expected_output_file, target_output)
+
+
 def test_missing_identifier(mocker: MockerFixture) -> None:
     """
     Test that an unknown identifier evaluates as False
