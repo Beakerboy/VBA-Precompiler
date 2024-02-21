@@ -12,7 +12,7 @@ vba_precompiler is tested on python 3.8 and higher.
 ## Installation
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install VBA-Precompiler.
 ```
-pip install 'vba_precompiler @ git+https://github.com/Beakerboy/VBA-Precompiler@dev'
+pip install vba_precompiler
 ```
 
 ## Getting Started
