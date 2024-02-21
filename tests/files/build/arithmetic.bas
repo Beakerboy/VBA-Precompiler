@@ -21,6 +21,6 @@ Attribute VB_Name = "Arithmetic"
     foo = 2
 '#endif
 
-'#if 1 / 2 <> .5 Then
+'#if 1 / 2 = .5 Then
     foo = 2
 '#endif
