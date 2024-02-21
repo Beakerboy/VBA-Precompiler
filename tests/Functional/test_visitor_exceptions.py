@@ -16,7 +16,7 @@ def test_null_literal(mocker: MockerFixture) -> None:
             input_file
         ],
     )
-    with pytest.raises(Exception):
+    with pytest.raises(SystemExit):
         main()
 
 
@@ -33,5 +33,5 @@ def test_like_operator(mocker: MockerFixture) -> None:
             input_file
         ],
     )
-    with pytest.raises(Exception):
+    with pytest.raises(SystemExit):
         main()
