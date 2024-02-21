@@ -31,7 +31,7 @@ def test_unsupported_version(mocker: MockerFixture) -> None:
         "sys.argv",
         [
             "vba_precompiler.py",
-            "-v2",,
+            "-v2",
             input_file
         ],
     )
