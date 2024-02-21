@@ -1,4 +1,4 @@
-from dateutil.parser import parser
+from dateutil.parser import parse
 from typing import Any, Dict, Type, TypeVar
 from antlr4_vba.vba_ccLexer import vba_ccLexer as Lexer
 from antlr4_vba.vba_ccParser import vba_ccParser as Parser
