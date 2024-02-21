@@ -20,3 +20,7 @@ Attribute VB_Name = "Arithmetic"
 '#if 2 ^ 2 = 4 Then
     foo = 2
 '#endif
+
+'#if 1 / 2 = .5 Then
+    foo = 2
+'#endif
