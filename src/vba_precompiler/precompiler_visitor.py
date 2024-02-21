@@ -193,7 +193,7 @@ class PrecompilerVisitor(vba_ccVisitor):
             return float(ctx.start.text)
         elif ctx.start.type == Lexer.DATELITERAL:
             return time.strptime(ctx.start.text)
-        // Nothing, Empty or Null
+        # Nothing, Empty or Null
         raise Exception("Nothing, Empty, and Null is not supported")
 
     def visitParenthesizedExpression(  # noqa: N802
