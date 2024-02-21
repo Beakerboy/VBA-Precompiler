@@ -1,4 +1,4 @@
-from typing import Any, Dict, TypeVar
+from typing import Any, Dict, Type, TypeVar
 from antlr4_vba.vba_ccLexer import vba_ccLexer as Lexer
 from antlr4_vba.vba_ccParser import vba_ccParser as Parser
 from antlr4_vba.vba_ccVisitor import vba_ccVisitor
@@ -91,7 +91,8 @@ class PrecompilerVisitor(vba_ccVisitor):
                          ctx: Parser.LogicalLineContext) -> None:
         if self.com_line_stk[-1] > self.NO_COMMENT_FOUND_TRUE:
             newline_token = ctx.getChild(0)
-            num = len(self.split_nl(newline_token.symbol.text))
+            tok_text = newline_token.symbol.text
+            num = len(PrecompilerVisitor.split_nl(tok_text))
             start = newline_token.symbol.line + 1
             stop = start + num
             comment_lines = range(start, stop)
@@ -193,7 +194,7 @@ class PrecompilerVisitor(vba_ccVisitor):
     ) -> Any:
         return self.visit(ctx.getChild(1))
 
-    def split_nl(self: T, nl: str) -> list:
+    def split_nl(cls: Type[T], nl: str) -> list:
         """
         split a newline token into separate line-end characters.
         """
