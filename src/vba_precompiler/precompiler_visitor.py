@@ -151,7 +151,6 @@ class PrecompilerVisitor(vba_ccVisitor):
         elif op == '=':
             return left == right
         elif op == '<>' or op == '><':
-            raise Exception(str(left) + " is not equal to " + str(right))
             return left != right
         elif op == '>=' or op == '=>':
             return left >= right
