@@ -17,10 +17,10 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-  'PyYAML',
   'antlr4-python3-runtime',
   'antlr4-tools',
-  'antlr4-vba'
+  'antlr4_vba',
+  'python-dateutil',
 ]
 [project.optional-dependencies]
 tests = [
@@ -32,6 +32,7 @@ tests = [
   'pytest-cov',
   'pytest-mock',
   'types-antlr4-python3-runtime',
+  'types-python-dateutil',
 ]
 [project.urls]
 "Homepage" = "https://github.com/Beakerboy/VBA-Precompiler"
