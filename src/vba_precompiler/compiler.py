@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import TypeVar
 from antlr4_vba.vba_ccLexer import vba_ccLexer as Lexer
 from antlr4_vba.vba_ccParser import vba_ccParser as Parser
-from vba_precompiler.compiler_visitor import PrecompilerVisitor as Visitor
+from vba_precompiler.precompiler_visitor import PrecompilerVisitor as Visitor
 
 
 T = TypeVar('T', bound='Compiler')
