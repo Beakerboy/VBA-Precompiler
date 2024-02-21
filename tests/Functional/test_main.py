@@ -322,6 +322,25 @@ def test_nesting(mocker: MockerFixture) -> None:
     assert_files_identical(expected_output_file, target_output)
 
 
+def test_date_literal(mocker: MockerFixture) -> None:
+    """
+    Test that an the arithmetic operators work as expected.
+    """
+    input_path = "tests/files/project16"
+    file_name = "date.bas"
+    mocker.patch(
+        "sys.argv",
+        [
+            "vba_precompiler.py",
+            input_path,
+        ],
+    )
+    main()
+    expected_output_file = "./build/" + file_name
+    target_output = "./tests/files/build/" + file_name
+    assert_files_identical(expected_output_file, target_output)
+
+
 def assert_files_identical(new_file: str, target_output: str) -> bool:
     # if they are the same, just make the assertion
     # if not, raise an exception with details.
