@@ -51,7 +51,7 @@ def main() -> None:
         for name_value in params:
             pair = name_value.split("=")
             key = pair[0]
-            value = pair[2]
+            value = pair[1]
             if value[-1:1] == '""':
                 value = value[1:-1]
             env[key] = literal_from_string(value)
