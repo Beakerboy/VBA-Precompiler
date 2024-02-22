@@ -351,7 +351,7 @@ def test_define(mocker: MockerFixture) -> None:
         "sys.argv",
         [
             "vba_precompiler.py",
-            '-DIntTest=42,FloatTest=3.1415926535,BoolTest=True,StringTest="Yes"'
+            '-DIntTest=42,FloatTest=3.1415926535,BoolTest=True,StringTest="Yes"',
             input_path,
         ],
     )
