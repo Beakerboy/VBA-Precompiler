@@ -1,6 +1,7 @@
 import argparse
 import sys
 from pathlib import Path
+from typing import Any
 from vba_precompiler.compiler import Compiler
 
 
