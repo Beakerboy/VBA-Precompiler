@@ -349,7 +349,7 @@ def test_define(mocker: MockerFixture) -> None:
     file_name = "define.bas"
     args = ["IntTest=42", "FloatTest=3.1415926535",
             "BoolTest=True", 'StringTest="Yes"']
-    arg_string = args.join()
+    arg_string = ",".join(args)
     mocker.patch(
         "sys.argv",
         [
