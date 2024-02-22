@@ -91,7 +91,7 @@ def literal_convert(value: str) -> Any:
     """
     This can go into stdVBALib eventually.
     """
-    if value.upper() == "TRUE" or value.upper() == "FALSE"
+    if value.upper() == "TRUE" or value.upper() == "FALSE":
         return value.upper() == "TRUE"
     if str(int(value)) == value:
         return int(value)
