@@ -1,5 +1,6 @@
 import argparse
 import sys
+import vba_stdlib.literal_from_string
 from pathlib import Path
 from typing import Any
 from vba_precompiler.compiler import Compiler
@@ -54,7 +55,7 @@ def main() -> None:
             value = pair[2]
             if value[-1:1] == '""':
                 value = value[1:-1]
-            env[key] = literal_convert(value)
+            env[key] = literal_from_string(value)
     compiler = Compiler(env)
     Path(args.output).mkdir(parents=True, exist_ok=True)
     num_errors = 0
@@ -86,16 +87,6 @@ def find_files(path: Path) -> list:
         if child.suffix in [".bas", ".cls", ".frm"]:
             files.append(child)
     return files
-
-
-def literal_convert(value: str) -> Any:
-    """
-    This can go into stdVBALib eventually.
-    """
-    if value.upper() == "TRUE" or value.upper() == "FALSE":
-        return value.upper() == "TRUE"
-    if str(int(value)) == value:
-        return int(value)
 
 
 if __name__ == '__main__':
