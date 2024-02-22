@@ -347,11 +347,14 @@ def test_define(mocker: MockerFixture) -> None:
     """
     input_path = "tests/files/project17"
     file_name = "define.bas"
+    args = ["IntTest=42", "FloatTest=3.1415926535",
+            "BoolTest=True", 'StringTest="Yes"']
+    arg_string = args.join()
     mocker.patch(
         "sys.argv",
         [
             "vba_precompiler.py",
-            '-DIntTest=42,FloatTest=3.1415926535,BoolTest=True,StringTest="Yes"',
+            '-D' + arg_string,
             input_path,
         ],
     )
