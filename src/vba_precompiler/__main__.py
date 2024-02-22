@@ -8,6 +8,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--system", default="Win16",
                         help="Mac, Win16, Win32, or Win64")
+    parser.add_argument("-D", "--define", default="",
+                        help="Define an enviromnet variable")
     parser.add_argument("-v", "--version", default="6",
                         help="VBA version, 6 or 7")
     parser.add_argument("-o", "--output", default="./build",
@@ -41,9 +43,17 @@ def main() -> None:
         vba7 = True
     else:
         raise Exception("VBA Version Unsupported: " + args.version)
-
     env = {"WIN16": win16, "WIN32": win32, "WIN64": win64,
            "MAC": mac, "VBA6": vba6, "VBA7": vba7, "MAC_OFFICE_VERSION": 0}
+    if args.define != "":
+        params = args.define.split(',')
+        for name_value in params:
+            pair = name_value.split("=")
+            key = pair[0]
+            value = pair[2]
+            if value[-1:1] == '""':
+                value = value[1:-1]
+            env[key] = value
     compiler = Compiler(env)
     Path(args.output).mkdir(parents=True, exist_ok=True)
     num_errors = 0
