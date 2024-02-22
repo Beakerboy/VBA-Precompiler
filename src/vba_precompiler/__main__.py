@@ -1,6 +1,6 @@
 import argparse
 import sys
-import vba_stdlib.literal_factory import literal_from_string
+from vba_stdlib.literal_factory import literal_from_string
 from pathlib import Path
 from vba_precompiler.compiler import Compiler
 
