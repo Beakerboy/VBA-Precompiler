@@ -50,7 +50,7 @@ def main() -> None:
         params = args.define.split(',')
         for name_value in params:
             pair = name_value.split("=")
-            key = pair[0]
+            key = pair[0].upper()
             value = pair[1]
             if value[-1:1] == '""':
                 value = value[1:-1]
