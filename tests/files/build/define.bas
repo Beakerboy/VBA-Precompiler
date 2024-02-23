@@ -11,6 +11,6 @@ Attribute VB_Name = "Define"
 '#if FloatTest = 3.1415926535
     foo = 1
 '#endif
-'#if DateTest = #01 Jan 1999
+'#if DateTest = #01 Jan 1999#
     foo = 1
 '#endif
