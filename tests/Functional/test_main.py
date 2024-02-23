@@ -341,6 +341,30 @@ def test_date_literal(mocker: MockerFixture) -> None:
     assert_files_identical(expected_output_file, target_output)
 
 
+def test_define(mocker: MockerFixture) -> None:
+    """
+    Test that an the arithmetic operators work as expected.
+    """
+    input_path = "tests/files/project17"
+    file_name = "define.bas"
+    args = ["IntTest=42", "FloatTest=3.1415926535",
+            "BoolTest=True", 'StringTest="Yes"',
+            "DateTest=#Jan/1/1999#"]
+    arg_string = ",".join(args)
+    mocker.patch(
+        "sys.argv",
+        [
+            "vba_precompiler.py",
+            '-D' + arg_string,
+            input_path,
+        ],
+    )
+    main()
+    expected_output_file = "./build/" + file_name
+    target_output = "./tests/files/build/" + file_name
+    assert_files_identical(expected_output_file, target_output)
+
+
 def assert_files_identical(new_file: str, target_output: str) -> bool:
     # if they are the same, just make the assertion
     # if not, raise an exception with details.

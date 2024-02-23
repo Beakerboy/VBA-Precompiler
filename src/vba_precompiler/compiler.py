@@ -11,8 +11,8 @@ T = TypeVar('T', bound='Compiler')
 
 class Compiler:
     # class default constructor
-    def __init__(self: T, environment: dict) -> None:
-        self.environment = environment
+    def __init__(self: T, env: dict) -> None:
+        self.environment = env
 
     def compile(self: T, path: str) -> str:
         if Path(path).exists():
