@@ -43,7 +43,7 @@ Attribute VB_Name = "Input"
 ```
 To run the program
 ```
-python vba_precompiler.py [-h] [-s SYSTEM] [-v VERSION] [-o OUTPUT] directory
+python vba_precompiler.py [-h] [-s SYSTEM] [-D DEFINE] [-v VERSION] [-o OUTPUT] directory
 
 positional arguments:
   directory             The source directory.
@@ -52,11 +52,12 @@ options:
   -h, --help            show this help message and
                         exit
   -s, --system          System Type, Win16, Win32, Win64, or Mac.
+  -D, --define          Define an environment variable 
   -v, --version         VBA version, 6 or 7.
   -o, --output         output path, defaults to ./build.
 
 examples:
-  python -m vba_precompiler -s Win32 -v 7 -o ./build32_7 ./project
+  python -m vba_precompiler -s Win32 -D TESTING=True -v 7 -o ./build32_7 ./project
 ```
 
 ## Tests
