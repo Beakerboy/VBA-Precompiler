@@ -14,4 +14,3 @@ Attribute VB_Name = "Define"
 #if DateTest = #01 Jan 1999#
     foo = 1
 #endif
-
